@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <set>
+            <!--<objectAnimator
+                android:duration="300"
+                android:propertyName="rotationX"
+                android:valueFrom="0"
+                android:valueTo="60"
+                android:valueType="floatType" />-->
+            <objectAnimator
+                android:duration="300"
+                android:propertyName="scaleY"
+                android:valueFrom="1"
+                android:valueTo="0.9"
+                android:valueType="floatType"/>
+        </set>
+    </item>
+    <item android:state_pressed="false">
+        <set>
+      <!--      <objectAnimator
+                android:duration="300"
+                android:propertyName="rotationX"
+                android:valueFrom="60"
+                android:valueTo="0"
+                android:valueType="floatType" />-->
+            <objectAnimator
+                android:duration="300"
+                android:propertyName="scaleY"
+                android:valueFrom="0.9"
+                android:valueTo="1"
+                android:valueType="floatType"/>
+        </set>
+    </item>
+</selector>

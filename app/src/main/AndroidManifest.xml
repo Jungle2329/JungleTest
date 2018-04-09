@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.zy.jungletest">
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:name="com.zy.jungletest.MyApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme">
+
+        <activity android:name=".activity.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".activity.TestGridViewActivity" />
+        <activity android:name=".activity.TestLolipopDemoActivity" />
+        <activity android:name=".activity.TextureViewDemo" />
+        <activity android:name=".activity.CustomViewActivity" />
+        <activity android:name=".activity.DatabaseTestActivity" />
+        <activity android:name=".activity.GestureDetectorTestActivity" />
+        <activity android:name=".activity.SlidingMenuTestActivity" />
+        <activity android:name=".activity.RetrofitTestActivity" />
+        <activity android:name=".activity.ExifInterfaceActivity" />
+        <activity android:name=".activity.RadarActivity" />
+        <activity android:name=".activity.AsyncTaskActivity" />
+
+        <activity
+            android:name=".activity.launchMode.LaunchModeTestActivity"
+            android:launchMode="singleTask" />
+        <activity android:name=".activity.launchMode.LaunchModeAActivity" />
+        <activity android:name=".activity.launchMode.LaunchModeBActivity" />
+
+        <activity android:name=".activity.RetrofitRxActivity" />
+    </application>
+
+</manifest>

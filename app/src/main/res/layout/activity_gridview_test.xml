@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--<com.zy.jungletest.view.HeaderGridView-->
+    <!--android:id="@+id/hgv"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
+
+    <!--</com.zy.jungletest.view.HeaderGridView>-->
+
+    <EditText
+        android:id="@+id/et_01"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="列数" />
+
+    <Button
+        android:id="@+id/bt_01"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="完成" />
+
+    <com.zy.jungletest.view.GridViewWithHeaderAndFooter
+        android:id="@+id/hgv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.zy.jungletest.view.GridViewWithHeaderAndFooter>
+
+</LinearLayout>
