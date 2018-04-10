@@ -13,14 +13,6 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-//        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-//                .addInterceptor(new LoggerInterceptor(""))
-//                .connectTimeout(10000L, TimeUnit.MILLISECONDS)
-//                .readTimeout(10000L, TimeUnit.MILLISECONDS)
-//                //其他配置
-//                .build();
-//
-//        OkHttpUtils.initClient(okHttpClient);
         Log.i("zhangyi", "MyApplication");
     }
 }

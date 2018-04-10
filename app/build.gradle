@@ -53,9 +53,8 @@ dependencies {
     //    compile 'com.squareup.okhttp3:okhttp:3.8.0'
     //    compile 'com.squareup.okio:okio:1.13.0'
     //    compile 'com.zhy:okhttputils:2.6.2'//鸿洋大神的okHttpUtils
-
     //json动画库
     compile 'com.airbnb.android:lottie:2.3.1'
-
     compile project(':commonLibrary')
+    compile project(':quickRetrofit')
 }

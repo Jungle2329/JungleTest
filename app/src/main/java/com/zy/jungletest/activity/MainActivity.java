@@ -22,6 +22,17 @@ import android.widget.Toast;
 import com.zy.commonlibrary.utils.AESUtil;
 import com.zy.jungletest.R;
 import com.zy.jungletest.activity.launchMode.LaunchModeTestActivity;
+import com.zy.jungletest.activity.testActivity.AsyncTaskActivity;
+import com.zy.jungletest.activity.testActivity.CustomViewActivity;
+import com.zy.jungletest.activity.testActivity.ExifInterfaceActivity;
+import com.zy.jungletest.activity.testActivity.GestureDetectorTestActivity;
+import com.zy.jungletest.activity.testActivity.RadarActivity;
+import com.zy.jungletest.activity.testActivity.RetrofitRxActivity;
+import com.zy.jungletest.activity.testActivity.RetrofitTestActivity;
+import com.zy.jungletest.activity.testActivity.SlidingMenuTestActivity;
+import com.zy.jungletest.activity.testActivity.TestGridViewActivity;
+import com.zy.jungletest.activity.testActivity.TestLolipopDemoActivity;
+import com.zy.jungletest.activity.testActivity.TextureViewDemo;
 import com.zy.jungletest.database.DatabaseHelper;
 
 import java.lang.annotation.Retention;

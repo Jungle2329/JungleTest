@@ -22,17 +22,17 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.TestGridViewActivity" />
-        <activity android:name=".activity.TestLolipopDemoActivity" />
-        <activity android:name=".activity.TextureViewDemo" />
-        <activity android:name=".activity.CustomViewActivity" />
-        <activity android:name=".activity.DatabaseTestActivity" />
-        <activity android:name=".activity.GestureDetectorTestActivity" />
-        <activity android:name=".activity.SlidingMenuTestActivity" />
-        <activity android:name=".activity.RetrofitTestActivity" />
-        <activity android:name=".activity.ExifInterfaceActivity" />
-        <activity android:name=".activity.RadarActivity" />
-        <activity android:name=".activity.AsyncTaskActivity" />
+        <activity android:name=".activity.testActivity.TestGridViewActivity" />
+        <activity android:name=".activity.testActivity.TestLolipopDemoActivity" />
+        <activity android:name=".activity.testActivity.TextureViewDemo" />
+        <activity android:name=".activity.testActivity.CustomViewActivity" />
+        <activity android:name=".activity.testActivity.DatabaseTestActivity" />
+        <activity android:name=".activity.testActivity.GestureDetectorTestActivity" />
+        <activity android:name=".activity.testActivity.SlidingMenuTestActivity" />
+        <activity android:name=".activity.testActivity.RetrofitTestActivity" />
+        <activity android:name=".activity.testActivity.ExifInterfaceActivity" />
+        <activity android:name=".activity.testActivity.RadarActivity" />
+        <activity android:name=".activity.testActivity.AsyncTaskActivity" />
 
         <activity
             android:name=".activity.launchMode.LaunchModeTestActivity"
@@ -40,7 +40,7 @@
         <activity android:name=".activity.launchMode.LaunchModeAActivity" />
         <activity android:name=".activity.launchMode.LaunchModeBActivity" />
 
-        <activity android:name=".activity.RetrofitRxActivity" />
+        <activity android:name=".activity.testActivity.RetrofitRxActivity" />
     </application>
 
 </manifest>
