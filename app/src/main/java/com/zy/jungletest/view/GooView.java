@@ -14,7 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.OvershootInterpolator;
 
-import com.zy.jungletest.utils.GeometryUtil;
+import com.zy.commonlibrary.utils.GeometryUtil;
 
 /**
  * 粘性空间

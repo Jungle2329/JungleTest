@@ -9,7 +9,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.zy.jungletest.utils.PxUtils;
+import com.zy.commonlibrary.utils.PxUtils;
 
 /**
  * Created by Jungle on 2017/12/5.

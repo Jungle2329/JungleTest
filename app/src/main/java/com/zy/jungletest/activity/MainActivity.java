@@ -19,11 +19,10 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.zy.commonlibrary.BaseRetrofit;
+import com.zy.commonlibrary.utils.AESUtil;
 import com.zy.jungletest.R;
 import com.zy.jungletest.activity.launchMode.LaunchModeTestActivity;
 import com.zy.jungletest.database.DatabaseHelper;
-import com.zy.jungletest.utils.AESUtil;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -249,7 +248,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.bt18://Rx+Retrofit
                 Intent limit = new Intent(this, RetrofitRxActivity.class);
                 startActivity(limit);
-                new BaseRetrofit.Builder().build().test();
                 break;
 
         }

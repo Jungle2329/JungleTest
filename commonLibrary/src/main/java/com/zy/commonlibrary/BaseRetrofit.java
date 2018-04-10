@@ -9,7 +9,6 @@ import java.util.concurrent.TimeUnit;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.Result;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -39,9 +38,6 @@ public class BaseRetrofit {
         return this;
     }
 
-    public void test() {
-
-    }
 
 //    public void get(HashMap<String, String> map) {
 //        mRetrofit
@@ -72,15 +68,10 @@ public class BaseRetrofit {
 //                });
 //    }
 
-//    public T getApi(Class<T> clazz) {
-//        return mRetrofit.create(clazz);
-//    }
-
-    public interface OnListener<T> {
-        void setAListener(Result<T> result);
-
-        void setBListener(Throwable e);
+    public <T>T getApi(Class<T> clazz) {
+        return mRetrofit.create(clazz);
     }
+
 
     public static class Builder {
         private OkHttpClient mOkHttpClient;

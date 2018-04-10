@@ -8,8 +8,8 @@
 //
 //import com.google.gson.Gson;
 //import com.google.gson.GsonBuilder;
-//import com.zy.jungletest.utils.MD511;
-//import com.zy.jungletest.utils.NetUtil;
+//import com.zy.commonlibrary.utils.MD511;
+//import com.zy.commonlibrary.utils.NetUtil;
 //
 //import java.io.File;
 //import java.io.IOException;

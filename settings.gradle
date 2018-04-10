@@ -1,1 +1,1 @@
-include ':app', ':kotlintest', ':myapplication', ':commonLibrary'
+include ':app', ':myapplication', ':commonLibrary'

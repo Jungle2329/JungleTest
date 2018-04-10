@@ -11,16 +11,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.zy.commonlibrary.MyLoggerInterceptor;
 import com.zy.jungletest.R;
 import com.zy.jungletest.api.ApiRetrofitGet;
-import com.zy.jungletest.app.BaseApi;
-import com.zy.jungletest.app.BaseRetrofit;
-import com.zy.jungletest.app.MyLoggerInterceptor;
-import com.zy.jungletest.model.BaseModel;
 import com.zy.jungletest.model.Translation;
 
 import java.io.File;
-import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
@@ -65,8 +61,7 @@ public class RetrofitRxActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String words = et_words.getText().toString().trim();
                 if (!TextUtils.isEmpty(words)) {
-//                    getDate(words);
-                    testBaseRetrofit();
+                    getDate(words);
                 } else {
                     Toast.makeText(RetrofitRxActivity.this, "请输入词语", Toast.LENGTH_SHORT).show();
                 }
@@ -195,45 +190,4 @@ public class RetrofitRxActivity extends AppCompatActivity {
 
     }
 
-    private void testBaseRetrofit() {
-        //        ?app=api&api_version=3.4.8&mod=Thread&act=detail&type=&since_time=0&auth=&tid=15172
-        HashMap<String ,String> map = new HashMap<>();
-        map.put("mod","Thread");
-        map.put("act","detail");
-        map.put("type","");
-        map.put("tid","15172");
-        map.put("since_time","0");
-        map.put("auth","MmM4ZHVKWWJYcEtNNHlIM3Ntais0d3ZWTUlLWFRadlIyOWZqVlVhTmtSelp4bzNQc0xidlZn");
-        new BaseRetrofit
-                .Builder()
-                .setClient(this)
-                .build()
-                .exe()
-                .getApi(BaseApi.class)
-                .getBaseDate(map)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Result<BaseModel>>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(Result<BaseModel> baseModelResult) {
-                        Log.i("zhangyi", baseModelResult.response().code() + "");
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-
-    }
 }

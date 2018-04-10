@@ -14,7 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zy.jungletest.R;
-import com.zy.jungletest.utils.PxUtils;
+import com.zy.commonlibrary.utils.PxUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

@@ -1,4 +1,4 @@
-package com.zy.jungletest.utils;
+package com.zy.commonlibrary.utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

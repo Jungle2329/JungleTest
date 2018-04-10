@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import retrofit2.adapter.rxjava2.Result;
 
+
 /**
  * Created by Jungle on 2018/4/4.
  */
