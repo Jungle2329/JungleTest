@@ -79,22 +79,24 @@ public class BaseRetrofit {
         private final String BASEURL = "http://test.ldcang.com";
 
         public Builder setClient(Context mContext) {
+            //OkHttp中使用拦截器添加统一参数到请求前
             BasicParamsInterceptor mBasicParamsInterceptor = new BasicParamsInterceptor
                     .Builder()
                     .addParam("app", "api")
                     .addParam("api_version", "3.4.8")
                     .build();
-
+            //设置缓存地址
             File cacheFile = new File(mContext.getCacheDir(), "HttpCache");
             Cache cache = new Cache(cacheFile, 1024 * 1024 * 10); //10Mb
 
+            //创建OKHTTP请求
             mOkHttpClient = new OkHttpClient.Builder()
                     .connectTimeout(12, TimeUnit.SECONDS)
                     .writeTimeout(20, TimeUnit.SECONDS)
                     .readTimeout(20, TimeUnit.SECONDS)
                     .retryOnConnectionFailure(true)//断线重新连接
-                    .addInterceptor(new MyLoggerInterceptor(""))
-                    .addInterceptor(mBasicParamsInterceptor)
+                    .addInterceptor(new MyLoggerInterceptor(""))//日志拦截
+                    .addInterceptor(mBasicParamsInterceptor)//参数添加拦截
                     .cache(cache)
                     .build();
             return this;

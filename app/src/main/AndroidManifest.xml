@@ -33,6 +33,7 @@
         <activity android:name=".activity.testActivity.ExifInterfaceActivity" />
         <activity android:name=".activity.testActivity.RadarActivity" />
         <activity android:name=".activity.testActivity.AsyncTaskActivity" />
+        <activity android:name=".mvpTest.activity.MVPTestActivity"/>
 
         <activity
             android:name=".activity.launchMode.LaunchModeTestActivity"
