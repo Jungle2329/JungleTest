@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zy.jungletest.view.InterceptLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <com.zy.jungletest.view.InterceptButton
+        android:id="@+id/btn_a"
+        android:layout_width="90dp"
+        android:layout_height="40dp"
+        android:text="A" />
+
+    <com.zy.jungletest.view.InterceptTextView
+        android:id="@+id/tv_b"
+        android:layout_width="90dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="100dp"
+        android:background="@color/blue_btn_bg_color"
+        android:gravity="center"
+        android:text="B" />
+</com.zy.jungletest.view.InterceptLinearLayout>

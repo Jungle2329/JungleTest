@@ -33,6 +33,7 @@ import com.zy.jungletest.activity.testActivity.SlidingMenuTestActivity;
 import com.zy.jungletest.activity.testActivity.TestGridViewActivity;
 import com.zy.jungletest.activity.testActivity.TestLolipopDemoActivity;
 import com.zy.jungletest.activity.testActivity.TextureViewDemo;
+import com.zy.jungletest.activity.testActivity.TouchEventTestActivity;
 import com.zy.jungletest.database.DatabaseHelper;
 import com.zy.jungletest.mvpTest.activity.MVPTestActivity;
 
@@ -119,7 +120,8 @@ public class MainActivity extends AppCompatActivity {
     @OnClick({R.id.bt01, R.id.bt02, R.id.bt03, R.id.bt04, R.id.bt05
             , R.id.bt06, R.id.bt07, R.id.bt08, R.id.bt09, R.id.bt10
             , R.id.bt11, R.id.bt12, R.id.bt13, R.id.bt14, R.id.bt15
-            , R.id.bt16, R.id.bt17, R.id.bt18, R.id.bt19, R.id.btm})
+            , R.id.bt16, R.id.bt17, R.id.bt18, R.id.bt19, R.id.bt20
+            , R.id.btm})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btm:
@@ -262,10 +264,16 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(limit);
                 break;
 
-            case R.id.bt19:
+            case R.id.bt19://MVP测试
                 Intent intent = new Intent(this, MVPTestActivity.class);
                 startActivity(intent);
                 break;
+
+            case R.id.bt20://事件分发的学习
+                Intent intent1= new Intent(this, TouchEventTestActivity.class);
+                startActivity(intent1);
+                break;
+
 
         }
     }

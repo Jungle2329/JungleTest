@@ -4,7 +4,7 @@ package com.zy.jungletest.model;
  * Created by Jungle on 2018/3/22.
  */
 
-public class RetrofitRxTestBean {
+public class RetrofitRxTestBean<T> extends BaseModel<T>{
 
     /**
      * content : {"from":"zh-CN","to":"en-US","out":"hello","vendor":"ciba","err_no":0}
