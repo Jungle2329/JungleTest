@@ -26,6 +26,7 @@ import com.zy.jungletest.activity.testActivity.AsyncTaskActivity;
 import com.zy.jungletest.activity.testActivity.CustomViewActivity;
 import com.zy.jungletest.activity.testActivity.ExifInterfaceActivity;
 import com.zy.jungletest.activity.testActivity.GestureDetectorTestActivity;
+import com.zy.jungletest.activity.testActivity.NestedScrollViewTestActivity;
 import com.zy.jungletest.activity.testActivity.RadarActivity;
 import com.zy.jungletest.activity.testActivity.RetrofitRxActivity;
 import com.zy.jungletest.activity.testActivity.RetrofitTestActivity;
@@ -121,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
             , R.id.bt06, R.id.bt07, R.id.bt08, R.id.bt09, R.id.bt10
             , R.id.bt11, R.id.bt12, R.id.bt13, R.id.bt14, R.id.bt15
             , R.id.bt16, R.id.bt17, R.id.bt18, R.id.bt19, R.id.bt20
-            , R.id.btm})
+            , R.id.btm, R.id.bt21})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btm:
@@ -274,6 +275,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent1);
                 break;
 
+            case R.id.bt21://NestedScrollTest
+                Intent intent11= new Intent(this, NestedScrollViewTestActivity.class);
+                startActivity(intent11);
+                break;
 
         }
     }

@@ -159,6 +159,12 @@
                     android:layout_height="wrap_content"
                     android:text="TouchEvent" />
 
+                <Button
+                    android:id="@+id/bt21"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NestedScrollTest" />
+
             </LinearLayout>
 
         </ScrollView>

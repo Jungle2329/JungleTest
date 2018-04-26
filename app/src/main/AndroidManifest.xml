@@ -35,6 +35,7 @@
         <activity android:name=".activity.testActivity.AsyncTaskActivity" />
         <activity android:name=".mvpTest.activity.MVPTestActivity" />
         <activity android:name=".activity.testActivity.TouchEventTestActivity" />
+        <activity android:name=".activity.testActivity.NestedScrollViewTestActivity"/>
 
         <activity
             android:name=".activity.launchMode.LaunchModeTestActivity"

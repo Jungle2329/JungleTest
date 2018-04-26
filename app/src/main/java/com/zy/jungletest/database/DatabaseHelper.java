@@ -15,11 +15,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      */
     private static final int DB_VERSION = 2;
     private static final String DB_NAME = "ldcang";
-    private static final String CREATE_TABLE = "create table ldcang ("
-            + "id integer primary key autoincrement, "
-            + "name text, "
-            + "age integer, "
-            + "flag boolean)";
 
 
     public DatabaseHelper(final Context context) {
@@ -31,7 +26,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(final SQLiteDatabase db) {
-        db.execSQL(CREATE_TABLE);
+        db.execSQL("create table ldcang ("
+                + "id integer primary key autoincrement, "
+                + "name text, "
+                + "age integer, "
+                + "flag boolean)");
     }
 
     /**
