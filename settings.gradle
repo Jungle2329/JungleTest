@@ -1,1 +1,1 @@
-include ':app', ':commonLibrary', ':quickRetrofit'
+include ':app', ':commonLibrary', ':quickRetrofit', ':processesLibrary', ':annotationsLibrary'

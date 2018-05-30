@@ -3,8 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/JungleTest.iml" filepath="$PROJECT_DIR$/JungleTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/annotationsLibrary/annotationsLibrary.iml" filepath="$PROJECT_DIR$/annotationsLibrary/annotationsLibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/commonLibrary/commonLibrary.iml" filepath="$PROJECT_DIR$/commonLibrary/commonLibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/processesLibrary/processesLibrary.iml" filepath="$PROJECT_DIR$/processesLibrary/processesLibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/quickRetrofit/quickRetrofit.iml" filepath="$PROJECT_DIR$/quickRetrofit/quickRetrofit.iml" />
     </modules>
   </component>

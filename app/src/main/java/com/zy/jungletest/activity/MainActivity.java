@@ -19,6 +19,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.annotationslibrary.EasyLog;
 import com.zy.commonlibrary.utils.AESUtil;
 import com.zy.jungletest.R;
 import com.zy.jungletest.activity.launchMode.LaunchModeTestActivity;
@@ -35,8 +36,10 @@ import com.zy.jungletest.activity.testActivity.TestGridViewActivity;
 import com.zy.jungletest.activity.testActivity.TestLolipopDemoActivity;
 import com.zy.jungletest.activity.testActivity.TextureViewDemo;
 import com.zy.jungletest.activity.testActivity.TouchEventTestActivity;
+import com.zy.jungletest.annotationTest.MethodInfo;
 import com.zy.jungletest.database.DatabaseHelper;
 import com.zy.jungletest.mvpTest.activity.MVPTestActivity;
+import com.zy.jungletest.proxyTest.ProxyTest;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -49,6 +52,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
+@EasyLog(tag = "Zhang", value = "Yi")
 public class MainActivity extends AppCompatActivity {
 
     public static final int WINTER = 0;
@@ -122,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
             , R.id.bt06, R.id.bt07, R.id.bt08, R.id.bt09, R.id.bt10
             , R.id.bt11, R.id.bt12, R.id.bt13, R.id.bt14, R.id.bt15
             , R.id.bt16, R.id.bt17, R.id.bt18, R.id.bt19, R.id.bt20
-            , R.id.btm, R.id.bt21})
+            , R.id.btm, R.id.bt21, R.id.bt22, R.id.bt23})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btm:
@@ -157,6 +161,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
                 break;
             case R.id.bt04://TextureVie
+                @EasyLog(tag = "Zhang", value = "Yi")
                 Intent asd = new Intent(this, TextureViewDemo.class);
                 startActivity(asd);
                 break;
@@ -271,25 +276,59 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.bt20://事件分发的学习
-                Intent intent1= new Intent(this, TouchEventTestActivity.class);
+                Intent intent1 = new Intent(this, TouchEventTestActivity.class);
                 startActivity(intent1);
                 break;
 
             case R.id.bt21://NestedScrollTest
-                Intent intent11= new Intent(this, NestedScrollViewTestActivity.class);
+                Intent intent11 = new Intent(this, NestedScrollViewTestActivity.class);
                 startActivity(intent11);
+                break;
+
+            case R.id.bt22:
+                ProxyTest test = new ProxyTest();
+                test.getProxy(this).eat();
+                test.getProxy(this).drink();
+                a(Color.BLUE);
+                break;
+
+            case R.id.bt23:
+                try {
+                    Class<?> clazz = Class.forName("com.zy.jungletest.annotationTest.AnnotationActivity");
+                    for (Method method : clazz.getMethods()) {
+                        if (method.isAnnotationPresent(MethodInfo.class)) {
+                            MethodInfo mMethodInfo = method.getAnnotation(MethodInfo.class);
+                            if (mMethodInfo != null) {
+                                Log.i("zhangyi", method.getName());
+                                Log.i("zhangyi", mMethodInfo.author());
+                                Log.i("zhangyi", mMethodInfo.date());
+                                Log.i("zhangyi", mMethodInfo.versionCode() + "");
+                            }
+                        }
+                    }
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
                 break;
 
         }
     }
 
 
-    @IntDef({WINTER, SUMMER, SPRING, FALL})
+    @IntDef(value = {WINTER, SUMMER, SPRING, FALL})
     @Retention(RetentionPolicy.SOURCE)
     public @interface Season {
     }
 
     private void ss(@Season int season) {
         Toast.makeText(this, season, Toast.LENGTH_SHORT).show();
+    }
+
+    private void a(Color d) {
+        d.ordinal();
+    }
+
+    public enum Color {
+        RED, BLUE, YELLOW, PINK, GREEN
     }
 }
