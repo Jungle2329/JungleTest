@@ -175,6 +175,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="注解演示" />
+
+                <Button
+                    android:id="@+id/bt24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="LayoutManager学习" />
             </LinearLayout>
 
         </ScrollView>
