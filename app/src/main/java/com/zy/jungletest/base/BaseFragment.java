@@ -28,6 +28,11 @@ public abstract class BaseFragment extends Fragment {
         return rootView;
     }
 
+    //获取布局文件
+    protected abstract int getLayoutResource();
+    protected abstract void initData();
+    protected abstract void initListener();
+
     @Override
     public void onResume() {
         super.onResume();
@@ -37,13 +42,6 @@ public abstract class BaseFragment extends Fragment {
     public void onPause() {
         super.onPause();
     }
-
-    //获取布局文件
-    protected abstract int getLayoutResource();
-    //初始化view
-    protected abstract void initData();
-    //初始化listener
-    protected abstract void initListener();
 
     @Override
     public void onDestroy() {

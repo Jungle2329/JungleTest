@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 26
@@ -19,6 +21,10 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -38,7 +44,7 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     //Rx的包
-    compile 'io.reactivex.rxjava2:rxjava:2.0.7'
+    compile 'io.reactivex.rxjava2:rxjava:2.1.1'
     //Rx的包
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     //Retrofit2所需要的包
@@ -61,4 +67,13 @@ dependencies {
     compile project(':quickRetrofit')
     implementation project(':annotationsLibrary')
     implementation project(':processesLibrary')
+    compile('com.github.huburt-Hu:NewbieGuide:v2.1.0') {
+        exclude group: 'com.android.support'
+    }
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    compile 'com.facebook.fresco:fresco:1.9.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+}
+repositories {
+    mavenCentral()
 }

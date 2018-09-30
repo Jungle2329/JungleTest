@@ -3,6 +3,7 @@ package com.zy.jungletest.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -19,6 +20,10 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
+import com.app.hubert.guide.NewbieGuide;
+import com.app.hubert.guide.model.GuidePage;
+import com.app.hubert.guide.model.HighLight;
 import com.example.annotationslibrary.EasyLog;
 import com.zy.commonlibrary.utils.AESUtil;
 import com.zy.jungletest.R;
@@ -27,20 +32,28 @@ import com.zy.jungletest.activity.testActivity.AsyncTaskActivity;
 import com.zy.jungletest.activity.testActivity.CustomViewActivity;
 import com.zy.jungletest.activity.testActivity.ExifInterfaceActivity;
 import com.zy.jungletest.activity.testActivity.GestureDetectorTestActivity;
+import com.zy.jungletest.activity.testActivity.KotlinTestActivity;
 import com.zy.jungletest.activity.testActivity.LayoutManagerTestActivity;
+import com.zy.jungletest.activity.testActivity.MultipleViewPagerManagerActivity;
 import com.zy.jungletest.activity.testActivity.NestedScrollViewTestActivity;
 import com.zy.jungletest.activity.testActivity.RadarActivity;
 import com.zy.jungletest.activity.testActivity.RetrofitRxActivity;
-import com.zy.jungletest.activity.testActivity.RetrofitTestActivity;
+import com.zy.jungletest.activity.testActivity.RxJavaLearnActivity;
 import com.zy.jungletest.activity.testActivity.SlidingMenuTestActivity;
+import com.zy.jungletest.activity.testActivity.SuperBigImageActivity;
 import com.zy.jungletest.activity.testActivity.TestGridViewActivity;
 import com.zy.jungletest.activity.testActivity.TestLolipopDemoActivity;
 import com.zy.jungletest.activity.testActivity.TextureViewDemo;
 import com.zy.jungletest.activity.testActivity.TouchEventTestActivity;
 import com.zy.jungletest.annotationTest.MethodInfo;
+import com.zy.jungletest.api.ApiRetrofit;
 import com.zy.jungletest.database.DatabaseHelper;
+import com.zy.jungletest.model.RetrofitRxTestBean;
+import com.zy.jungletest.model.TranslationBean;
 import com.zy.jungletest.mvpTest.activity.MVPTestActivity;
 import com.zy.jungletest.proxyTest.ProxyTest;
+import com.zy.jungletest.view.AtTextView;
+import com.zy.quickretrofit.RetrofitHelper;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -52,6 +65,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import io.reactivex.ObservableSource;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
+import retrofit2.adapter.rxjava2.Result;
 
 @EasyLog(tag = "Zhang", value = "Yi")
 public class MainActivity extends AppCompatActivity {
@@ -61,18 +81,49 @@ public class MainActivity extends AppCompatActivity {
     public static final int SUMMER = 2;
     public static final int FALL = 3;
 
+    @IntDef(value = {WINTER, SUMMER, SPRING, FALL})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface Season {
+    }
+
     @BindView(R.id.drawer_layout)
     DrawerLayout drawer_layout;
     @BindView(R.id.btm)
     Button btm;
+    @BindView(R.id.lav_logo)
+    LottieAnimationView lav_logo;
+    @BindView(R.id.atv)
+    AtTextView atv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // 设置竖屏
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        if (savedInstanceState != null) {
+            String hello = savedInstanceState.getString("hello");
+            Log.i("zhangyi", hello);
+        }
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setTransparencyBar(this);
+        NewbieGuide.with(this)
+                .setLabel("test")
+                .alwaysShow(true)
+                .addGuidePage(GuidePage.newInstance()
+                        .addHighLight(btm, HighLight.Shape.OVAL)
+                        .setLayoutRes(R.layout.activity_asynctask))
+                .show();
+//        atv.setOnLongClickListener(new View.OnLongClickListener() {
+//            @Override
+//            public boolean onLongClick(View v) {
+//                Toast.makeText(MainActivity.this, "123", Toast.LENGTH_SHORT).show();
+//                return true;
+//            }
+//        });
     }
+
 
     /**
      * 修改状态栏为全透明，这个是自己写的，其他方法未验证
@@ -94,6 +145,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("hello", "world");
+        Log.i("zhangyi", "true");
+    }
+
     /**
      * 获取是否存在NavigationBar虚拟按键
      *
@@ -107,6 +165,7 @@ public class MainActivity extends AppCompatActivity {
         if (id > 0) {
             hasNavigationBar = rs.getBoolean(id);
         }
+
         try {
             Class systemPropertiesClass = Class.forName("android.os.SystemProperties");
             Method m = systemPropertiesClass.getMethod("get", String.class);
@@ -120,15 +179,17 @@ public class MainActivity extends AppCompatActivity {
 
         }
         return hasNavigationBar;
-
     }
 
+
     @OnClick({R.id.bt01, R.id.bt02, R.id.bt03, R.id.bt04, R.id.bt05
-            , R.id.bt06, R.id.bt07, R.id.bt08, R.id.bt09, R.id.bt10
+            , R.id.bt06, R.id.bt07, R.id.bt08, R.id.bt10
             , R.id.bt11, R.id.bt12, R.id.bt13, R.id.bt14, R.id.bt15
             , R.id.bt16, R.id.bt17, R.id.bt18, R.id.bt19, R.id.bt20
-            , R.id.btm, R.id.bt21, R.id.bt22, R.id.bt23, R.id.bt24})
+            , R.id.btm, R.id.bt21, R.id.bt22, R.id.bt23, R.id.bt24
+            , R.id.bt25, R.id.bt26, R.id.bt27, R.id.bt28})
     public void onClick(View view) {
+        Intent mIntent = new Intent();
         switch (view.getId()) {
             case R.id.btm:
                 if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
@@ -139,13 +200,11 @@ public class MainActivity extends AppCompatActivity {
                     btm.setText("close");
                 }
 
-//                new BaseRetrofit.Builder()
-//                        .a().b().c().d().b().build().a();
 
                 break;
             case R.id.bt01:
-                Intent a = new Intent(this, TestGridViewActivity.class);
-                startActivity(a);
+                mIntent.setClass(this, TestGridViewActivity.class);
+                startActivity(mIntent);
                 break;
             case R.id.bt02:
                 new SweetAlertDialog(this).show();
@@ -158,17 +217,16 @@ public class MainActivity extends AppCompatActivity {
 //                        .show();
                 break;
             case R.id.bt03://5.0效果测试
-                Intent i = new Intent(this, TestLolipopDemoActivity.class);
-                startActivity(i);
+                mIntent.setClass(this, TestLolipopDemoActivity.class);
+                startActivity(mIntent);
                 break;
             case R.id.bt04://TextureVie
-                @EasyLog(tag = "Zhang", value = "Yi")
-                Intent asd = new Intent(this, TextureViewDemo.class);
-                startActivity(asd);
+                mIntent.setClass(this, TextureViewDemo.class);
+                startActivity(mIntent);
                 break;
             case R.id.bt05:
-                Intent i5 = new Intent(this, CustomViewActivity.class);
-                startActivity(i5);
+                mIntent.setClass(this, CustomViewActivity.class);
+                startActivity(mIntent);
                 break;
 
             case R.id.bt06://数据库测试
@@ -196,18 +254,13 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.bt07://手势测试
-                Intent intent07 = new Intent(this, GestureDetectorTestActivity.class);
-                startActivity(intent07);
+                mIntent.setClass(this, GestureDetectorTestActivity.class);
+                startActivity(mIntent);
                 break;
 
             case R.id.bt08://SlidingMenu
-                Intent intent08 = new Intent(this, SlidingMenuTestActivity.class);
-                startActivity(intent08);
-                break;
-
-            case R.id.bt09:
-                Intent intent09 = new Intent(this, RetrofitTestActivity.class);
-                startActivity(intent09);
+                mIntent.setClass(this, SlidingMenuTestActivity.class);
+                startActivity(mIntent);
                 break;
 
             case R.id.bt10:
@@ -228,18 +281,47 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.bt12:
-                String url = "https://baike.baidu.com/vbaike/%E8%A7%A3%E8%AF%BB%E4%B9%9D%E5%AF%A8%E6%B2%9F%E5%9C%B0%E9%9C%87/18581";
-//                OkHttpUtils.get().url(url).build().execute(new StringCallback() {
-//                    @Override
-//                    public void onError(Call call, Exception e, int id) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onResponse(String response, int id) {
-//                        Log.i("zhangyi", response);
-//                    }
-//                });
+                //使用flatMap实现多个接口依次请求
+                String url = "http://fanyi.youdao.com/";
+                new RetrofitHelper()
+                        .with(this)
+                        .setBaseUrl(url)
+                        .build()
+                        .create(ApiRetrofit.class)
+                        .getDate("1")
+                        .flatMap(new Function<Result<TranslationBean>, ObservableSource<Result<RetrofitRxTestBean>>>() {
+                            @Override
+                            public ObservableSource<Result<RetrofitRxTestBean>> apply(Result<TranslationBean> translationBeanResult) throws Exception {
+                                return new RetrofitHelper()
+                                        .with(MainActivity.this)
+                                        .build()
+                                        .create(ApiRetrofit.class)
+                                        .getCall("2");
+                            }
+                        })
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Observer<Result<RetrofitRxTestBean>>() {
+                            @Override
+                            public void onSubscribe(Disposable d) {
+
+                            }
+
+                            @Override
+                            public void onNext(Result<RetrofitRxTestBean> retrofitRxTestBeanResult) {
+
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+
+                            }
+
+                            @Override
+                            public void onComplete() {
+
+                            }
+                        });
                 break;
 
             case R.id.bt13:
@@ -247,53 +329,52 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.bt14://ExifInterface研究
-                Intent exifIntent = new Intent(this, ExifInterfaceActivity.class);
-                startActivity(exifIntent);
+                mIntent.setClass(this, ExifInterfaceActivity.class);
+                startActivity(mIntent);
                 break;
 
             case R.id.bt15://radar
-                Intent radarIntent = new Intent(this, RadarActivity.class);
-                startActivity(radarIntent);
+                mIntent.setClass(this, RadarActivity.class);
+                startActivity(mIntent);
                 break;
 
             case R.id.bt16://AsyncTaskActivity
-                Intent asyncIntent = new Intent(this, AsyncTaskActivity.class);
-                startActivity(asyncIntent);
+                mIntent.setClass(this, AsyncTaskActivity.class);
+                startActivity(mIntent);
                 break;
 
             case R.id.bt17://启动模式
-                Intent launchIntent = new Intent(this, LaunchModeTestActivity.class);
-                startActivity(launchIntent);
+                mIntent.setClass(this, LaunchModeTestActivity.class);
+                startActivity(mIntent);
                 break;
 
-            case R.id.bt18://Rx+Retrofit
-                Intent limit = new Intent(this, RetrofitRxActivity.class);
-                startActivity(limit);
+            case R.id.bt18://Rx+Retrofit 翻译单词
+                mIntent.setClass(this, RetrofitRxActivity.class);
+                startActivity(mIntent);
                 break;
 
             case R.id.bt19://MVP测试
-                Intent intent = new Intent(this, MVPTestActivity.class);
-                startActivity(intent);
+                mIntent.setClass(this, MVPTestActivity.class);
+                startActivity(mIntent);
                 break;
 
             case R.id.bt20://事件分发的学习
-                Intent intent1 = new Intent(this, TouchEventTestActivity.class);
-                startActivity(intent1);
+                mIntent.setClass(this, TouchEventTestActivity.class);
+                startActivity(mIntent);
                 break;
 
             case R.id.bt21://NestedScrollTest
-                Intent intent11 = new Intent(this, NestedScrollViewTestActivity.class);
-                startActivity(intent11);
+                mIntent.setClass(this, NestedScrollViewTestActivity.class);
+                startActivity(mIntent);
                 break;
 
-            case R.id.bt22:
+            case R.id.bt22://代理模式学习
                 ProxyTest test = new ProxyTest();
                 test.getProxy(this).eat();
                 test.getProxy(this).drink();
-                a(Color.BLUE);
                 break;
 
-            case R.id.bt23:
+            case R.id.bt23://利用反射取注解上的信息
                 try {
                     Class<?> clazz = Class.forName("com.zy.jungletest.annotationTest.AnnotationActivity");
                     for (Method method : clazz.getMethods()) {
@@ -312,29 +393,35 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
 
-            case R.id.bt24:
-                Intent ad = new Intent(this, LayoutManagerTestActivity.class);
-                startActivity(ad);
+            case R.id.bt24:// LayoutManager学习
+                mIntent.setClass(this, LayoutManagerTestActivity.class);
+                startActivity(mIntent);
+                break;
+
+            case R.id.bt25:
+                mIntent.setClass(this, SuperBigImageActivity.class);
+                startActivity(mIntent);
+                break;
+
+            case R.id.bt26:
+                mIntent.setClass(this, KotlinTestActivity.class);
+                startActivity(mIntent);
+                break;
+
+            case R.id.bt27:
+                mIntent.setClass(this, MultipleViewPagerManagerActivity.class);
+                startActivity(mIntent);
+                break;
+
+            case R.id.bt28:
+                mIntent.setClass(this, RxJavaLearnActivity.class);
+                startActivity(mIntent);
                 break;
 
         }
     }
 
-
-    @IntDef(value = {WINTER, SUMMER, SPRING, FALL})
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface Season {
-    }
-
     private void ss(@Season int season) {
         Toast.makeText(this, season, Toast.LENGTH_SHORT).show();
-    }
-
-    private void a(Color d) {
-        d.ordinal();
-    }
-
-    public enum Color {
-        RED, BLUE, YELLOW, PINK, GREEN
     }
 }

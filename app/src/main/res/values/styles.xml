@@ -16,4 +16,9 @@
         <attr name="corner_size" format="dimension" />
         <attr name="size" format="dimension" />
     </declare-styleable>
+
+    <declare-styleable name="AtTextView">
+        <attr name="regularExpression" format="string"/>
+        <attr name="keywordsColor" format="color"/>
+    </declare-styleable>
 </resources>

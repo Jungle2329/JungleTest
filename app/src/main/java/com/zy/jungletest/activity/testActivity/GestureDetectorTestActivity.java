@@ -1,8 +1,5 @@
 package com.zy.jungletest.activity.testActivity;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -13,34 +10,46 @@ import android.view.animation.TranslateAnimation;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.zy.jungletest.R;
 import com.zy.commonlibrary.utils.PxUtils;
+import com.zy.jungletest.R;
+import com.zy.jungletest.base.BaseActivity;
+import com.zy.jungletest.view.DragView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * 手势检测测试类
  * Created by Jungle on 2017/3/13.
  */
 
-public class GestureDetectorTestActivity extends AppCompatActivity{
+public class GestureDetectorTestActivity extends BaseActivity{
 
     @BindView(R.id.tv)
     TextView tv;
     @BindView(R.id.ll_top)
     LinearLayout ll_top;
+    @BindView(R.id.dragView)
+    DragView dragView;
+    private GestureDetector mGestureDetector;
+
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gesture_detector);
+    protected int getViewId() {
+        return R.layout.activity_gesture_detector;
+    }
 
-        ButterKnife.bind(this);
+    @Override
+    protected void initView() {
+        mGestureDetector = new GestureDetector(this, new MyOnGestureListener());
+    }
 
+    @Override
+    protected void initData() {
 
-        final GestureDetector mGestureDetector = new GestureDetector(this, new MyOnGestureListener());
+    }
 
+    @Override
+    protected void initListener() {
         tv.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -48,6 +57,7 @@ public class GestureDetectorTestActivity extends AppCompatActivity{
                 return true;
             }
         });
+
     }
 
     private void playAnimatorIn() {

@@ -29,7 +29,6 @@
         <activity android:name=".activity.testActivity.DatabaseTestActivity" />
         <activity android:name=".activity.testActivity.GestureDetectorTestActivity" />
         <activity android:name=".activity.testActivity.SlidingMenuTestActivity" />
-        <activity android:name=".activity.testActivity.RetrofitTestActivity" />
         <activity android:name=".activity.testActivity.ExifInterfaceActivity" />
         <activity android:name=".activity.testActivity.RadarActivity" />
         <activity android:name=".activity.testActivity.AsyncTaskActivity" />
@@ -38,14 +37,17 @@
         <activity android:name=".activity.testActivity.NestedScrollViewTestActivity" />
         <activity android:name=".annotationTest.AnnotationActivity" />
         <activity android:name=".activity.testActivity.LayoutManagerTestActivity" />
-
         <activity
             android:name=".activity.launchMode.LaunchModeTestActivity"
             android:launchMode="singleTask" />
         <activity android:name=".activity.launchMode.LaunchModeAActivity" />
         <activity android:name=".activity.launchMode.LaunchModeBActivity" />
-
         <activity android:name=".activity.testActivity.RetrofitRxActivity" />
+        <activity android:name=".activity.testActivity.SuperBigImageActivity" />
+        <activity android:name=".activity.testActivity.KotlinTestActivity" />
+        <activity android:name=".activity.testActivity.NewTestActivity" />
+        <activity android:name=".activity.testActivity.MultipleViewPagerManagerActivity" />
+        <activity android:name=".activity.testActivity.RxJavaLearnActivity" />
     </application>
 
 </manifest>

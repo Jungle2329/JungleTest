@@ -8,6 +8,7 @@
     tools:context="com.zy.jungletest.activity.MainActivity">
 
     <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lav_logo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:lottie_autoPlay="true"
@@ -87,12 +88,6 @@
                     android:text="SlidingMenu" />
 
                 <Button
-                    android:id="@+id/bt09"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="retorfit" />
-
-                <Button
                     android:id="@+id/bt10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -108,13 +103,13 @@
                     android:id="@+id/bt12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="jsoup测试" />
+                    android:text="使用flatMap实现多个接口依次请求" />
 
                 <Button
                     android:id="@+id/bt13"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="枚举测试" />
+                    android:text="IntDef类型限定" />
 
                 <Button
                     android:id="@+id/bt14"
@@ -144,7 +139,7 @@
                     android:id="@+id/bt18"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Rx+Retrofit" />
+                    android:text="翻译单词" />
 
                 <Button
                     android:id="@+id/bt19"
@@ -181,6 +176,37 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="LayoutManager学习" />
+
+                <Button
+                    android:id="@+id/bt25"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="超长图解决方案" />
+
+                <Button
+                    android:id="@+id/bt26"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="kotlin学习" />
+
+                <com.zy.jungletest.view.AtTextView
+                    android:id="@+id/atv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="荔枝纹，算是@金刚纹路;@金刚纹路;@金刚纹路;@金路;里面比较差的了。后期@盘完;肉会的效果。练@手不错;，建议入手串比较好的。这样对得起自己的精力。我也是个新手玩家，大家可以多交流@金刚纹路;"
+                    android:textIsSelectable="true" />
+
+                <Button
+                    android:id="@+id/bt27"
+                    android:layout_width="wrap_content"
+                    android:text="viewpager测试"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:id="@+id/bt28"
+                    android:layout_width="wrap_content"
+                    android:text="Rx2.0学习"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
         </ScrollView>

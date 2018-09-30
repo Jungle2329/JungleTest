@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatEditText;
+import android.text.TextUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +28,8 @@ public class MVPTestActivity extends AppCompatActivity implements MvpView {
 
     @BindView(R.id.text)
     TextView text;
+    @BindView(R.id.aet_input)
+    AppCompatEditText aet_input;
 
     private ProgressDialog progressDialog;
     private MVPPresenter mMVPPresenter;
@@ -46,19 +50,12 @@ public class MVPTestActivity extends AppCompatActivity implements MvpView {
 
     @OnClick(R.id.getData)
     public void getData() {
-        mMVPPresenter.getData("success");
+        String trsWords = aet_input.getText().toString().trim();
+        if(TextUtils.isEmpty(trsWords)) {
+            return;
+        }
+        mMVPPresenter.getData(trsWords);
     }
-
-    @OnClick(R.id.getDataForFailure)
-    public void getDataForFailure() {
-        mMVPPresenter.getData("failure");
-    }
-
-    @OnClick(R.id.getDataForError)
-    public void getDataForError() {
-        mMVPPresenter.getData("error");
-    }
-
 
     @Override
     public void showLoading() {

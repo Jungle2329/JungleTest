@@ -1,9 +1,10 @@
 package com.zy.quickretrofit;
 
+import android.support.annotation.NonNull;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +20,8 @@ import okio.Buffer;
 
 /**
  * 一般参数拦截器，把共性的参数在基类中用拦截器添加
+ * Jungle
+ * 2018-09-29
  */
 public class BasicParamsInterceptor implements Interceptor {
 
@@ -32,55 +35,48 @@ public class BasicParamsInterceptor implements Interceptor {
     }
 
     @Override
-    public Response intercept(Chain chain) throws IOException {
+    public Response intercept(@NonNull Chain chain) throws IOException {
 
         Request request = chain.request();
         Request.Builder requestBuilder = request.newBuilder();
 
-        // process header params inject
+        //↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓注入header数据↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
         Headers.Builder headerBuilder = request.headers().newBuilder();
         if (headerParamsMap.size() > 0) {
-            Iterator iterator = headerParamsMap.entrySet().iterator();
-            while (iterator.hasNext()) {
-                Map.Entry entry = (Map.Entry) iterator.next();
-                headerBuilder.add((String) entry.getKey(), (String) entry.getValue());
+            for (Map.Entry o : headerParamsMap.entrySet()) {
+                headerBuilder.add((String) o.getKey(), (String) o.getValue());
             }
         }
-
+        //注入字符串的header
         if (headerLinesList.size() > 0) {
-            for (String line: headerLinesList) {
+            for (String line : headerLinesList) {
                 headerBuilder.add(line);
             }
         }
-
         requestBuilder.headers(headerBuilder.build());
-        // process header params end
+        //↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑注入header数据↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
 
-
-
+        //↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓注入url数据↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
         // process queryParams inject whatever it's GET or POST
         if (queryParamsMap.size() > 0) {
             injectParamsIntoUrl(request, requestBuilder, queryParamsMap);
         }
-        // process header params end
+        //↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑注入url数据↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
 
-
-
+        //判断是post请求就可以向body中添加数据，不是post就还是向url中添加数据
         // process post body inject
         if (request.method().equals("POST") && request.body().contentType().subtype().equals("x-www-form-urlencoded")) {
             FormBody.Builder formBodyBuilder = new FormBody.Builder();
             if (paramsMap.size() > 0) {
-                Iterator iterator = paramsMap.entrySet().iterator();
-                while (iterator.hasNext()) {
-                    Map.Entry entry = (Map.Entry) iterator.next();
-                    formBodyBuilder.add((String) entry.getKey(), (String) entry.getValue());
+                for (Map.Entry<String, String> m : paramsMap.entrySet()) {
+                    formBodyBuilder.add(m.getKey(), m.getValue());
                 }
             }
             RequestBody formBody = formBodyBuilder.build();
             String postBodyString = bodyToString(request.body());
-            postBodyString += ((postBodyString.length() > 0) ? "&" : "") +  bodyToString(formBody);
+            postBodyString += ((postBodyString.length() > 0) ? "&" : "") + bodyToString(formBody);
             requestBuilder.post(RequestBody.create(MediaType.parse("application/x-www-form-urlencoded;charset=UTF-8"), postBodyString));
         } else {    // can't inject into body, then inject into url
             injectParamsIntoUrl(request, requestBuilder, paramsMap);
@@ -90,31 +86,27 @@ public class BasicParamsInterceptor implements Interceptor {
         return chain.proceed(request);
     }
 
-    // func to inject params into url
+    // 向url中直接注入参数
     private void injectParamsIntoUrl(Request request, Request.Builder requestBuilder, Map<String, String> paramsMap) {
         HttpUrl.Builder httpUrlBuilder = request.url().newBuilder();
         if (paramsMap.size() > 0) {
-            Iterator iterator = paramsMap.entrySet().iterator();
-            while (iterator.hasNext()) {
-                Map.Entry entry = (Map.Entry) iterator.next();
-                httpUrlBuilder.addQueryParameter((String) entry.getKey(), (String) entry.getValue());
+            for (Map.Entry<String, String> e : paramsMap.entrySet()) {
+                httpUrlBuilder.addQueryParameter(e.getKey(), e.getValue());
             }
         }
 
         requestBuilder.url(httpUrlBuilder.build());
     }
 
-    private static String bodyToString(final RequestBody request){
+    private static String bodyToString(final RequestBody request) {
         try {
-            final RequestBody copy = request;
             final Buffer buffer = new Buffer();
-            if(copy != null)
-                copy.writeTo(buffer);
+            if (request != null)
+                request.writeTo(buffer);
             else
                 return "";
             return buffer.readUtf8();
-        }
-        catch (final IOException e) {
+        } catch (final IOException e) {
             return "did not work";
         }
     }
@@ -157,7 +149,7 @@ public class BasicParamsInterceptor implements Interceptor {
         }
 
         public Builder addHeaderLinesList(List<String> headerLinesList) {
-            for (String headerLine: headerLinesList) {
+            for (String headerLine : headerLinesList) {
                 int index = headerLine.indexOf(":");
                 if (index == -1) {
                     throw new IllegalArgumentException("Unexpected header: " + headerLine);

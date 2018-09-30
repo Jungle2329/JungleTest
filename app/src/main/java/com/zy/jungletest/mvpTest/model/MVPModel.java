@@ -5,7 +5,7 @@ import android.content.Context;
 import com.zy.jungletest.api.ApiRetrofit;
 import com.zy.jungletest.model.TranslationBean;
 import com.zy.jungletest.mvpTest.mvpInterface.MvpCallback;
-import com.zy.quickretrofit.BaseRetrofit;
+import com.zy.quickretrofit.RetrofitHelper;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -20,12 +20,12 @@ import retrofit2.adapter.rxjava2.Result;
 
 public class MVPModel {
     public static void getNetData(Context context, final String params, final MvpCallback callback) {
-        new BaseRetrofit.Builder()
-                .setClient(context)
+
+        new RetrofitHelper()
+                .with(context)
                 .setBaseUrl("http://fanyi.youdao.com/")
                 .build()
-                .exe()
-                .getApi(ApiRetrofit.class)
+                .create(ApiRetrofit.class)
                 .getDate(params)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -54,22 +54,5 @@ public class MVPModel {
                         callback.onComplete();
                     }
                 });
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                switch (params) {
-//                    case "success":
-//                        callback.onSuccess("成功");
-//                        break;
-//                    case "failure":
-//                        callback.onFailure("请求失败");
-//                        break;
-//                    case "error":
-//                        callback.onError();
-//                        break;
-//                }
-//                callback.onComplete();
-//            }
-//        }, 2000);
     }
 }

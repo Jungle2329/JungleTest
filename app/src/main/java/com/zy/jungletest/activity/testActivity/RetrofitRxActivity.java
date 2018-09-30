@@ -111,58 +111,6 @@ public class RetrofitRxActivity extends AppCompatActivity {
 
                     }
                 });
-//                .subscribe(new Observer<Translation>() {
-//                    @Override
-//                    public void onSubscribe(Disposable d) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onNext(Translation translation) {
-//                        tv_result.setText(translation.getTranslateResult().get(0).get(0).getTgt());
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onComplete() {
-//
-//                    }
-//                });
-
-
-//        Observable.create(new ObservableOnSubscribe<Integer>() {
-//            @Override
-//            public void subscribe(ObservableEmitter<Integer> e) throws Exception {
-//                e.onNext(1);
-//                e.onNext(2);
-//                e.onNext(3);
-//                e.onComplete();
-//            }
-//        }).subscribe(new Observer<Integer>() {
-//            @Override
-//            public void onSubscribe(Disposable d) {
-//
-//            }
-//
-//            @Override
-//            public void onNext(Integer integer) {
-//
-//            }
-//
-//            @Override
-//            public void onError(Throwable e) {
-//
-//            }
-//
-//            @Override
-//            public void onComplete() {
-//
-//            }
-//        });
 
     }
 

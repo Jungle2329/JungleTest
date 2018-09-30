@@ -34,6 +34,16 @@ public class AppUtils {
     }
 
     /**
+     * 获取屏幕高度
+     *
+     * @param context
+     * @return
+     */
+    public static int getWindowHeight(Context context) {
+        return context.getResources().getDisplayMetrics().heightPixels;
+    }
+
+    /**
      * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
      */
     public static int dip2px(Context context, float dpValue) {
