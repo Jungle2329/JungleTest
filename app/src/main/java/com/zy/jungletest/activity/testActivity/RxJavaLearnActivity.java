@@ -9,6 +9,8 @@ import android.widget.TextView;
 import com.zy.jungletest.R;
 import com.zy.jungletest.base.BaseActivity;
 
+import java.util.concurrent.Callable;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.Observable;
@@ -21,6 +23,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
+import io.reactivex.subjects.PublishSubject;
 
 /**
  * Created by Jungle on 2018/9/21 0021.
@@ -32,6 +35,7 @@ public class RxJavaLearnActivity extends BaseActivity {
 
     @BindView(R.id.tv_content)
     TextView tv_content;
+    public int a = 10;
 
     @Override
     protected int getViewId() {
@@ -41,12 +45,21 @@ public class RxJavaLearnActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        Runnable race2 = () -> System.out.println("Hello world !");
+        new Thread(() -> System.out.println("Hello world !")).start();
+        new Thread(() -> {
 
+        }).start();
+    }
+
+    interface MathOperation {
+        int operation(int b);
     }
 
     @Override
     protected void initData() {
-
+        MathOperation addition = (b) -> a + b;
+        addition.operation(1);
     }
 
     @Override
@@ -112,6 +125,7 @@ public class RxJavaLearnActivity extends BaseActivity {
 
     /**
      * 使用Map变换
+     * {@link com.zy.jungletest.activity.MainActivity}
      */
     private void doRx1() {
         clearContent();
@@ -164,21 +178,39 @@ public class RxJavaLearnActivity extends BaseActivity {
         clearContent();
         Observable
                 .just(1)
-                .flatMap(new Function<Integer, ObservableSource<Integer>>() {
-
-                    @Override
-                    public ObservableSource<Integer> apply(Integer integer) throws Exception {
-                        return Observable.just(integer + 1);
-                    }
-                })
+                .flatMap(integer -> Observable.just(integer + 1))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<Integer>() {
+                .subscribe(new Observer<Integer>() {
                     @Override
-                    public void accept(Integer i) throws Exception {
-                        addContent(String.valueOf(i));
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Integer integer) {
+                        addContent(String.valueOf(integer));
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
                     }
                 });
+    }
+
+    private void doRx3() {
+        Observable.defer(new ObservableSource<>() {
+            @Override
+            public void subscribe(Observer<> observer) {
+
+            }
+        })
     }
 
     @SuppressLint("SetTextI18n")
@@ -194,4 +226,5 @@ public class RxJavaLearnActivity extends BaseActivity {
     private void clearContent() {
         tv_content.setText("");
     }
+
 }

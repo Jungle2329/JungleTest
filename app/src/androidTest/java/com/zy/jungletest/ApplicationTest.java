@@ -58,4 +58,8 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
 
         db.close();
     }
+
+    public void testNormal() {
+        Log.i("test","123");
+    }
 }
