@@ -1,16 +1,20 @@
 package com.zy.jungletest.activity.testActivity;
 
 import android.content.Intent;
+import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.TextureView;
-import android.widget.Toast;
+import android.widget.FrameLayout;
 
 import com.zy.commonlibrary.utils.PermissionHelper;
 import com.zy.jungletest.R;
+
+import java.io.IOException;
 
 /**
  * Created by Jungle on 2017/1/3.
@@ -34,54 +38,50 @@ public class TextureViewDemo extends AppCompatActivity {
 
         mTextureView = findViewById(R.id.texture);
 
-        helper.checkPermissionNormal(() -> {
-            Toast.makeText(this, "申请完成", Toast.LENGTH_SHORT).show();
-        });
-//        helper.checkPermissionForce(new PermissionHelper.ForcePermissionCallbacks() {
-//            @Override
-//            public void onPermissionsAllGranted() {
-//                mTextureView.setSurfaceTextureListener(new TextureView.SurfaceTextureListener() {
-//                    @Override
-//                    public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
-//                        mCamera = Camera.open();
-//                        Camera.Size previewSize = mCamera.getParameters().getPreviewSize();
-//                        mTextureView.setLayoutParams(new FrameLayout.LayoutParams(previewSize.width, previewSize.height, Gravity.CENTER));
-//                        try {
-//                            mCamera.setPreviewTexture(surface);
-//                        } catch (IOException t) {
-//                        }
-//                        mCamera.startPreview();
-//                        mTextureView.setAlpha(1.0f);
-//                        mTextureView.setRotation(90.0f);
-//                    }
-//
-//                    @Override
-//                    public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
-//
-//                    }
-//
-//                    @Override
-//                    public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
-//                        if (mCamera != null) {
-//                            mCamera.stopPreview();
-//                            mCamera.release();
-//                        }
-//                        return true;
-//                    }
-//
-//                    @Override
-//                    public void onSurfaceTextureUpdated(SurfaceTexture surface) {
-//
-//                    }
-//                });
-//            }
-//
-//            @Override
-//            public void onPermissionsDenied() {
-//                finish();
-//            }
-//        });
+        helper.checkPermissionForce(new PermissionHelper.ForcePermissionCallbacks() {
+            @Override
+            public void onPermissionsAllGranted() {
+                mTextureView.setSurfaceTextureListener(new TextureView.SurfaceTextureListener() {
+                    @Override
+                    public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
+                        mCamera = Camera.open();
+                        Camera.Size previewSize = mCamera.getParameters().getPreviewSize();
+                        mTextureView.setLayoutParams(new FrameLayout.LayoutParams(previewSize.width, previewSize.height, Gravity.CENTER));
+                        try {
+                            mCamera.setPreviewTexture(surface);
+                        } catch (IOException t) {
+                        }
+                        mCamera.startPreview();
+                        mTextureView.setAlpha(1.0f);
+                        mTextureView.setRotation(90.0f);
+                    }
 
+                    @Override
+                    public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
+
+                    }
+
+                    @Override
+                    public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
+                        if (mCamera != null) {
+                            mCamera.stopPreview();
+                            mCamera.release();
+                        }
+                        return true;
+                    }
+
+                    @Override
+                    public void onSurfaceTextureUpdated(SurfaceTexture surface) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void onPermissionsDenied() {
+                finish();
+            }
+        });
 
     }
 
