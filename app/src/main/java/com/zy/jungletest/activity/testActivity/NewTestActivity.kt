@@ -1,6 +1,7 @@
 package com.zy.jungletest.activity.testActivity
 
 import com.zy.jungletest.R
+import com.zy.jungletest.api.toast
 import com.zy.jungletest.base.BaseActivity
 
 /**
@@ -14,7 +15,7 @@ class NewTestActivity : BaseActivity() {
     }
 
     override fun initView() {
-
+        toast("12")
     }
 
     override fun initData() {

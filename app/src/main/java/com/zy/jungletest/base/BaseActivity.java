@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.zy.commonlibrary.base.AppManager;
+
 import butterknife.ButterKnife;
 
 /**
@@ -27,9 +29,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected abstract int getViewId();
+
     protected abstract void initView();
+
     protected abstract void initData();
+
     protected abstract void initListener();
+
 
     /**
      * 设置layout前配置
@@ -37,5 +43,12 @@ public abstract class BaseActivity extends AppCompatActivity {
     private void doBeforeSetcontentView() {
         // 设置竖屏
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        AppManager.getAppManager().addActivity(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        AppManager.getAppManager().removeActivity(this);
     }
 }

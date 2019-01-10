@@ -16,7 +16,7 @@
             android:id="@+id/img_bg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/blue_btn_bg_color"
+            android:background="@color/colorMain"
             android:scaleType="centerCrop"
             android:transitionName="img_view_1" />
 

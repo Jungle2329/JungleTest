@@ -13,7 +13,7 @@ import android.view.VelocityTracker;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.zy.jungletest.utils.AppUtils;
+import com.zy.commonlibrary.utils.AppUtils;
 
 /**
  * Created by Jungle on 2018/8/31 0031.

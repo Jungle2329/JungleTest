@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.zy.jungletest.utils.AppUtils;
+import com.zy.commonlibrary.utils.AppUtils;
 
 /**
  * Created by Jungle on 2018/5/31 0031.

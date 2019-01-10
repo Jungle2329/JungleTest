@@ -1,6 +1,6 @@
 package com.zy.jungletest.annotationTest;
 
-import com.zy.jungletest.Constant;
+import com.zy.commonlibrary.base.Constant;
 import com.zy.jungletest.base.BaseActivity;
 
 /**

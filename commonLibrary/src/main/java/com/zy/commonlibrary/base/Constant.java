@@ -1,4 +1,4 @@
-package com.zy.jungletest;
+package com.zy.commonlibrary.base;
 
 /**
  * Created by Jungle on 2018/5/22 0022.

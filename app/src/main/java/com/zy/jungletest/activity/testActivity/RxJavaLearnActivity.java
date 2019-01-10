@@ -1,29 +1,38 @@
 package com.zy.jungletest.activity.testActivity;
 
 import android.annotation.SuppressLint;
+import android.os.Build;
 import android.os.Looper;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.zy.jungletest.Java8.Car;
 import com.zy.jungletest.R;
 import com.zy.jungletest.base.BaseActivity;
 
-import java.util.concurrent.Callable;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
-import io.reactivex.subjects.PublishSubject;
+import io.reactivex.schedulers.Timed;
 
 /**
  * Created by Jungle on 2018/9/21 0021.
@@ -36,6 +45,7 @@ public class RxJavaLearnActivity extends BaseActivity {
     @BindView(R.id.tv_content)
     TextView tv_content;
     public int a = 10;
+    private long current = 0;
 
     @Override
     protected int getViewId() {
@@ -58,6 +68,7 @@ public class RxJavaLearnActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+        current = System.currentTimeMillis();
         MathOperation addition = (b) -> a + b;
         addition.operation(1);
     }
@@ -74,7 +85,8 @@ public class RxJavaLearnActivity extends BaseActivity {
             case R.id.btn_start:
 //                doRx();
 //                doRx1();
-                doRx2();
+//                doRx2();
+                doRx3();
                 break;
         }
     }
@@ -204,14 +216,139 @@ public class RxJavaLearnActivity extends BaseActivity {
                 });
     }
 
-    private void doRx3() {
-        Observable.defer(new ObservableSource<>() {
-            @Override
-            public void subscribe(Observer<> observer) {
-
-            }
-        })
+    private void haha(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
+
+    /**
+     * 创建数据
+     * fromArray
+     * interval
+     * just
+     * range
+     * create
+     * empty/never/throw
+     */
+    private void doRx3() {
+
+//        Observable.defer(() -> Observable.just(1))
+//                .subscribe(new Observer<Integer>() {
+//                    @Override
+//                    public void onSubscribe(Disposable d) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onNext(Integer integer) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//
+//                    }
+//                });
+
+
+    }
+
+    private void createFromArray() {
+        Observable.fromArray(new int[]{1, 2, 3, 4, 5})
+                .timeInterval(TimeUnit.SECONDS)
+                .subscribe(new Observer<Timed<int[]>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Timed<int[]> timed) {
+                        clearContent();
+                        addContent(Arrays.toString(timed.value()));
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    private void createRange() {
+        Observable.range(1, 100)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Integer>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Integer integer) {
+                        clearContent();
+                        addContent(integer + "");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    private void createInterval() {
+        Observable.interval(1, 1000, TimeUnit.MILLISECONDS)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Long>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Long aLong) {
+                        current += 1000;
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss", Locale.getDefault());
+                        String time = sdf.format(new Date(current));
+                        clearContent();
+                        addContent(time);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private void java8() {
+        List<Car> list = Collections.singletonList(Car.create(Car::new));
+        list.forEach(Car::collide);
+    }
+
 
     @SuppressLint("SetTextI18n")
     private void addContent(String str) {

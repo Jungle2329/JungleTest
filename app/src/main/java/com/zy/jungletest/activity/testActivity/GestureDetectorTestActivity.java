@@ -10,7 +10,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.zy.commonlibrary.utils.PxUtils;
+import com.zy.commonlibrary.utils.AppUtils;
 import com.zy.jungletest.R;
 import com.zy.jungletest.base.BaseActivity;
 import com.zy.jungletest.view.DragView;
@@ -62,7 +62,7 @@ public class GestureDetectorTestActivity extends BaseActivity{
 
     private void playAnimatorIn() {
         AnimationSet as = new AnimationSet(true);
-        TranslateAnimation ta = new TranslateAnimation(0, 0, -PxUtils.dip2px(this, 400), 0);
+        TranslateAnimation ta = new TranslateAnimation(0, 0, -AppUtils.dip2px(this, 400), 0);
         ta.setDuration(300);
         as.addAnimation(ta);
         ll_top.startAnimation(as);
@@ -86,7 +86,7 @@ public class GestureDetectorTestActivity extends BaseActivity{
 
     private void playAnimatorOut() {
         AnimationSet as = new AnimationSet(true);
-        TranslateAnimation ta = new TranslateAnimation(0, 0, 0, -PxUtils.dip2px(this, 400));
+        TranslateAnimation ta = new TranslateAnimation(0, 0, 0, -AppUtils.dip2px(this, 400));
         ta.setDuration(300);
         as.addAnimation(ta);
         ll_top.startAnimation(as);

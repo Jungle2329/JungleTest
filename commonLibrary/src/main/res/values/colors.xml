@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--主色-->
+    <color name="colorMain">#45a989</color>
+    <!--不可点击-->
+    <color name="colorUnClickable">#9fd1c1</color>
+</resources>

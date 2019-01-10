@@ -7,210 +7,211 @@
     android:gravity="center"
     tools:context="com.zy.jungletest.activity.MainActivity">
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lav_logo"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:lottie_autoPlay="true"
-        app:lottie_fileName="android.json"
-        app:lottie_loop="true" />
-
-    <Button
-        android:id="@+id/btm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="120dp"
-        android:text="open" />
-
-    <android.support.v4.widget.DrawerLayout
-        android:id="@+id/drawer_layout"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ScrollView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:background="#351353">
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/bt01"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:text="头尾GridView"
+                android:textAllCaps="false" />
 
-                <Button
-                    android:id="@+id/bt01"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="头尾GridView" />
+            <Button
+                android:id="@+id/bt02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CommonAutoBanner"
+                android:textAllCaps="false" />
 
-                <Button
-                    android:id="@+id/bt02"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="SweetAlertDialog测试" />
+            <Button
+                android:id="@+id/bt03"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="LolipopTest"
+                android:textAllCaps="false" />
 
-                <Button
-                    android:id="@+id/bt03"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="LolipopTest" />
+            <Button
+                android:id="@+id/bt04"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextureView"
+                android:textAllCaps="false" />
 
-                <Button
-                    android:id="@+id/bt04"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="TextureView" />
+            <Button
+                android:id="@+id/bt05"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="自定义View"
+                android:textAllCaps="false" />
 
-                <Button
-                    android:id="@+id/bt05"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="自定义View" />
+            <Button
+                android:id="@+id/bt06"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="数据库测试" />
 
-                <Button
-                    android:id="@+id/bt06"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="数据库测试" />
+            <Button
+                android:id="@+id/bt07"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="手势测试" />
 
-                <Button
-                    android:id="@+id/bt07"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="手势测试" />
+            <Button
+                android:id="@+id/bt08"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SlidingMenu"
+                android:textAllCaps="false" />
 
-                <Button
-                    android:id="@+id/bt08"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="SlidingMenu" />
+            <Button
+                android:id="@+id/bt10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="加密测试" />
 
-                <Button
-                    android:id="@+id/bt10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="加密测试" />
+            <Button
+                android:id="@+id/bt11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="正则测试" />
 
-                <Button
-                    android:id="@+id/bt11"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="正则测试" />
+            <Button
+                android:id="@+id/bt12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="使用flatMap实现多个接口依次请求"
+                android:textAllCaps="false" />
 
-                <Button
-                    android:id="@+id/bt12"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="使用flatMap实现多个接口依次请求" />
+            <Button
+                android:id="@+id/bt13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="IntDef类型限定"
+                android:textAllCaps="false" />
 
-                <Button
-                    android:id="@+id/bt13"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="IntDef类型限定" />
+            <Button
+                android:id="@+id/bt14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="图片信息获取" />
 
-                <Button
-                    android:id="@+id/bt14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="图片信息获取" />
+            <Button
+                android:id="@+id/bt15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="radar"
+                android:textAllCaps="false" />
 
-                <Button
-                    android:id="@+id/bt15"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="radar" />
+            <Button
+                android:id="@+id/bt16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="静态内部类的示例以及AsyncTask的使用" />
 
-                <Button
-                    android:id="@+id/bt16"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="静态内部类的示例以及AsyncTask的使用" />
+            <Button
+                android:id="@+id/bt17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="启动模式测试" />
 
-                <Button
-                    android:id="@+id/bt17"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="启动模式测试" />
+            <Button
+                android:id="@+id/bt18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="翻译单词" />
 
-                <Button
-                    android:id="@+id/bt18"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="翻译单词" />
+            <Button
+                android:id="@+id/bt19"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MVPTest"
+                android:textAllCaps="false" />
 
-                <Button
-                    android:id="@+id/bt19"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="MVPTest" />
+            <Button
+                android:id="@+id/bt20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TouchEvent"
+                android:textAllCaps="false" />
 
-                <Button
-                    android:id="@+id/bt20"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="TouchEvent" />
+            <Button
+                android:id="@+id/bt21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NestedScrollTest"
+                android:textAllCaps="false" />
 
-                <Button
-                    android:id="@+id/bt21"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="NestedScrollTest" />
+            <Button
+                android:id="@+id/bt22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="代理模式测试"
+                android:textAllCaps="false" />
 
-                <Button
-                    android:id="@+id/bt22"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="代理模式测试" />
+            <Button
+                android:id="@+id/bt23"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="注解演示"
+                android:textAllCaps="false" />
 
-                <Button
-                    android:id="@+id/bt23"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="注解演示" />
+            <Button
+                android:id="@+id/bt24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="LayoutManager学习"
+                android:textAllCaps="false" />
 
-                <Button
-                    android:id="@+id/bt24"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="LayoutManager学习" />
+            <Button
+                android:id="@+id/bt25"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="超长图解决方案"
+                android:textAllCaps="false" />
 
-                <Button
-                    android:id="@+id/bt25"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="超长图解决方案" />
+            <Button
+                android:id="@+id/bt26"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="kotlin学习"
+                android:textAllCaps="false" />
 
-                <Button
-                    android:id="@+id/bt26"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="kotlin学习" />
+            <com.zy.jungletest.view.AtTextView
+                android:id="@+id/atv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="荔枝纹，算是@金刚纹路;@金刚纹路;@金刚纹路;@金路;里面比较差的了。后期@盘完;肉会的效果。练@手不错;，建议入手串比较好的。这样对得起自己的精力。我也是个新手玩家，大家可以多交流@金刚纹路;"
+                android:textIsSelectable="true" />
 
-                <com.zy.jungletest.view.AtTextView
-                    android:id="@+id/atv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="荔枝纹，算是@金刚纹路;@金刚纹路;@金刚纹路;@金路;里面比较差的了。后期@盘完;肉会的效果。练@手不错;，建议入手串比较好的。这样对得起自己的精力。我也是个新手玩家，大家可以多交流@金刚纹路;"
-                    android:textIsSelectable="true" />
+            <Button
+                android:id="@+id/bt27"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="viewpager测试"
+                android:textAllCaps="false" />
 
-                <Button
-                    android:id="@+id/bt27"
-                    android:layout_width="wrap_content"
-                    android:text="viewpager测试"
-                    android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/bt28"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rx2.0学习"
+                android:textAllCaps="false" />
 
-                <Button
-                    android:id="@+id/bt28"
-                    android:layout_width="wrap_content"
-                    android:text="Rx2.0学习"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
+            <Button
+                android:id="@+id/bt29"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="tts相关"
+                android:textAllCaps="false" />
 
-        </ScrollView>
-    </android.support.v4.widget.DrawerLayout>
+        </LinearLayout>
 
-
+    </ScrollView>
 </FrameLayout>

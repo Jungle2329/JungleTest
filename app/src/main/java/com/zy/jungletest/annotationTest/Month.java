@@ -2,7 +2,7 @@ package com.zy.jungletest.annotationTest;
 
 import android.support.annotation.IntDef;
 
-import com.zy.jungletest.Constant;
+import com.zy.commonlibrary.base.Constant;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

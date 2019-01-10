@@ -9,7 +9,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.zy.commonlibrary.utils.PxUtils;
+import com.zy.commonlibrary.utils.AppUtils;
 
 /**
  * Created by Jungle on 2017/12/5.
@@ -52,7 +52,7 @@ public class TestView extends View {
     }
 
     private void drawCircle(Canvas canvas) {
-        canvas.drawCircle(PxUtils.dip2px(getContext(), 10), PxUtils.dip2px(getContext(), 10), PxUtils.dip2px(getContext(), 10), mPaint);
+        canvas.drawCircle(AppUtils.dip2px(getContext(), 10), AppUtils.dip2px(getContext(), 10), AppUtils.dip2px(getContext(), 10), mPaint);
     }
 
     @Override

@@ -10,8 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import com.zy.commonlibrary.utils.AppUtils;
 import com.zy.jungletest.R;
-import com.zy.commonlibrary.utils.PxUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,7 +36,7 @@ public class SlidingMenuTestActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        currentMargin = PxUtils.dip2px(SlidingMenuTestActivity.this, -250);
+        currentMargin = AppUtils.dip2px(SlidingMenuTestActivity.this, -250);
 
         final GestureDetector mGestureDetector = new GestureDetector(this, new MyOnGestureListener());
 

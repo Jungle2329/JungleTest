@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#000000</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#45a989</color>
+    <color name="colorPrimaryDark">#45a989</color>
+    <color name="colorAccent">#45a989</color>
     <!--黑色-->
     <color name="half_transparent">#80000000</color>
     <!--黑色-->
     <color name="white">#ffffff</color>
+    <!--主色-->
+    <color name="colorMain">#45a989</color>
+    <!--不可点击-->
+    <color name="colorUnClickable">#9fd1c1</color>
+    <!--辅助色-->
+    <color name="colorBlue">#219dff</color>
+    <!--辅助色-->
+    <color name="colorGreen">#77bd02</color>
+    <!--辅助色-->
+    <color name="colorYellow">#ffb703</color>
 </resources>

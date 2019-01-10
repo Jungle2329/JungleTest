@@ -11,7 +11,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="@color/blue_btn_bg_pressed_color"
+        android:background="@color/colorMain"
         app:titleTextColor="@color/white" />
 
     <!--<android.support.v4.widget.SwipeRefreshLayout-->
@@ -38,7 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fitsSystemWindows="true"
-                app:contentScrim="@color/blue_btn_bg_pressed_color"
+                app:contentScrim="@color/colorMain"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
                 <include layout="@layout/include_scroll_head"></include>
@@ -49,7 +49,7 @@
                 android:id="@+id/tab_layout"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/red_btn_bg_color"
+                android:background="@color/colorMain"
                 app:tabIndicatorColor="#FFFFFFFF"
                 app:tabSelectedTextColor="#FF888888"
                 app:tabTextColor="#FFFFFFFF" />

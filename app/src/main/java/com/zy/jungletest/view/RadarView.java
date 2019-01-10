@@ -11,8 +11,8 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.zy.commonlibrary.utils.AppUtils;
 import com.zy.jungletest.R;
-import com.zy.commonlibrary.utils.PxUtils;
 
 /**
  * 雷达五边形
@@ -43,7 +43,7 @@ public class RadarView extends View {
     private String[] score = {"95", "5", "95", "70", "100"};
     private float maxScore = 100f;
     //雷达图与标题的间距
-    private int radarMargin = PxUtils.dip2px(getContext(), 8);
+    private int radarMargin = AppUtils.dip2px(getContext(), 8);
 
 
     public RadarView(Context context) {
@@ -74,7 +74,7 @@ public class RadarView extends View {
 
         titlePaint = new Paint();
         titlePaint.setAntiAlias(true);
-        titlePaint.setTextSize(PxUtils.dip2px(getContext(), 12));
+        titlePaint.setTextSize(AppUtils.dip2px(getContext(), 12));
         titlePaint.setColor(Color.WHITE);
         titlePaint.setStyle(Paint.Style.FILL);
     }
@@ -83,7 +83,7 @@ public class RadarView extends View {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         //雷达图半径
 //        radius = Math.min(h, w) / 2 * 0.5f;
-        radius = PxUtils.dip2px(getContext(), 60);
+        radius = AppUtils.dip2px(getContext(), 60);
         //中心坐标
         centerX = w / 2;
         centerY = h / 2;

@@ -1,29 +1,15 @@
 package com.zy.jungletest.activity;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.IntDef;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.Toast;
 
-import com.airbnb.lottie.LottieAnimationView;
-import com.app.hubert.guide.NewbieGuide;
-import com.app.hubert.guide.model.GuidePage;
-import com.app.hubert.guide.model.HighLight;
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.annotationslibrary.EasyLog;
 import com.zy.commonlibrary.utils.AESUtil;
 import com.zy.jungletest.R;
@@ -32,8 +18,10 @@ import com.zy.jungletest.activity.testActivity.AsyncTaskActivity;
 import com.zy.jungletest.activity.testActivity.CustomViewActivity;
 import com.zy.jungletest.activity.testActivity.ExifInterfaceActivity;
 import com.zy.jungletest.activity.testActivity.GestureDetectorTestActivity;
+import com.zy.jungletest.activity.testActivity.HandlerTestActivity;
 import com.zy.jungletest.activity.testActivity.KotlinTestActivity;
 import com.zy.jungletest.activity.testActivity.LayoutManagerTestActivity;
+import com.zy.jungletest.activity.testActivity.MakeSoundsActivity;
 import com.zy.jungletest.activity.testActivity.MultipleViewPagerManagerActivity;
 import com.zy.jungletest.activity.testActivity.NestedScrollViewTestActivity;
 import com.zy.jungletest.activity.testActivity.RadarActivity;
@@ -47,6 +35,7 @@ import com.zy.jungletest.activity.testActivity.TextureViewDemo;
 import com.zy.jungletest.activity.testActivity.TouchEventTestActivity;
 import com.zy.jungletest.annotationTest.MethodInfo;
 import com.zy.jungletest.api.ApiRetrofit;
+import com.zy.jungletest.base.BaseActivity;
 import com.zy.jungletest.database.DatabaseHelper;
 import com.zy.jungletest.model.RetrofitRxTestBean;
 import com.zy.jungletest.model.TranslationBean;
@@ -62,9 +51,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cn.pedant.SweetAlert.SweetAlertDialog;
 import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -74,7 +61,8 @@ import io.reactivex.schedulers.Schedulers;
 import retrofit2.adapter.rxjava2.Result;
 
 @EasyLog(tag = "Zhang", value = "Yi")
-public class MainActivity extends AppCompatActivity {
+@Route(path = "/main/mainActivity")
+public class MainActivity extends BaseActivity {
 
     public static final int WINTER = 0;
     public static final int SPRING = 1;
@@ -86,65 +74,14 @@ public class MainActivity extends AppCompatActivity {
     public @interface Season {
     }
 
-    @BindView(R.id.drawer_layout)
-    DrawerLayout drawer_layout;
-    @BindView(R.id.btm)
-    Button btm;
-    @BindView(R.id.lav_logo)
-    LottieAnimationView lav_logo;
     @BindView(R.id.atv)
     AtTextView atv;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // 设置竖屏
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
-        if (savedInstanceState != null) {
-            String hello = savedInstanceState.getString("hello");
-            Log.i("zhangyi", hello);
-        }
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
-        setTransparencyBar(this);
-        NewbieGuide.with(this)
-                .setLabel("test")
-                .alwaysShow(true)
-                .addGuidePage(GuidePage.newInstance()
-                        .addHighLight(btm, HighLight.Shape.OVAL)
-                        .setLayoutRes(R.layout.activity_asynctask))
-                .show();
-//        atv.setOnLongClickListener(new View.OnLongClickListener() {
-//            @Override
-//            public boolean onLongClick(View v) {
-//                Toast.makeText(MainActivity.this, "123", Toast.LENGTH_SHORT).show();
-//                return true;
-//            }
-//        });
-    }
-
-
     /**
-     * 修改状态栏为全透明，这个是自己写的，其他方法未验证
-     * 这里如果布局的根部不设置android:fitsSystemWindows="true"
-     * 布局会移动到状态栏里头，可以使用方法计算状态栏的高度，然后空开相应的高度，
-     * 空开的地方也可以自己设置颜色
-     * jungle
+     * 保存数据测试
      *
-     * @param activity
+     * @param outState
      */
-    public static void setTransparencyBar(Activity activity) {
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            Window window = activity.getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            //这里判断该手机是否有虚拟按键，如果有的话不设置该属性
-            if (!checkDeviceHasNavigationBar(activity))
-                window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-        }
-    }
-
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -152,33 +89,33 @@ public class MainActivity extends AppCompatActivity {
         Log.i("zhangyi", "true");
     }
 
-    /**
-     * 获取是否存在NavigationBar虚拟按键
-     *
-     * @param context
-     * @return
-     */
-    public static boolean checkDeviceHasNavigationBar(Context context) {
-        boolean hasNavigationBar = false;
-        Resources rs = context.getResources();
-        int id = rs.getIdentifier("config_showNavigationBar", "bool", "android");
-        if (id > 0) {
-            hasNavigationBar = rs.getBoolean(id);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            String hello = savedInstanceState.getString("hello");
+            Log.i("zhangyi", hello);
         }
+    }
 
-        try {
-            Class systemPropertiesClass = Class.forName("android.os.SystemProperties");
-            Method m = systemPropertiesClass.getMethod("get", String.class);
-            String navBarOverride = (String) m.invoke(systemPropertiesClass, "qemu.hw.mainkeys");
-            if ("1".equals(navBarOverride)) {
-                hasNavigationBar = false;
-            } else if ("0".equals(navBarOverride)) {
-                hasNavigationBar = true;
-            }
-        } catch (Exception e) {
+    @Override
+    protected int getViewId() {
+        return R.layout.activity_main;
+    }
 
-        }
-        return hasNavigationBar;
+    @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected void initListener() {
+
     }
 
 
@@ -186,35 +123,18 @@ public class MainActivity extends AppCompatActivity {
             , R.id.bt06, R.id.bt07, R.id.bt08, R.id.bt10
             , R.id.bt11, R.id.bt12, R.id.bt13, R.id.bt14, R.id.bt15
             , R.id.bt16, R.id.bt17, R.id.bt18, R.id.bt19, R.id.bt20
-            , R.id.btm, R.id.bt21, R.id.bt22, R.id.bt23, R.id.bt24
-            , R.id.bt25, R.id.bt26, R.id.bt27, R.id.bt28})
+            , R.id.bt21, R.id.bt22, R.id.bt23, R.id.bt24
+            , R.id.bt25, R.id.bt26, R.id.bt27, R.id.bt28, R.id.bt29})
     public void onClick(View view) {
         Intent mIntent = new Intent();
         switch (view.getId()) {
-            case R.id.btm:
-                if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
-                    drawer_layout.closeDrawer(GravityCompat.START);
-                    btm.setText("open");
-                } else {
-                    drawer_layout.openDrawer(GravityCompat.START);
-                    btm.setText("close");
-                }
-
-
-                break;
             case R.id.bt01:
                 mIntent.setClass(this, TestGridViewActivity.class);
                 startActivity(mIntent);
                 break;
             case R.id.bt02:
-                new SweetAlertDialog(this).show();
-//                new SweetAlertDialog(MainActivity.this, SweetAlertDialog.ERROR_TYPE).show();
-//                new SweetAlertDialog(MainActivity.this, SweetAlertDialog.PROGRESS_TYPE).show();
-//                new SweetAlertDialog(MainActivity.this, SweetAlertDialog.WARNING_TYPE).show();
-//                new SweetAlertDialog(MainActivity.this, SweetAlertDialog.SUCCESS_TYPE)
-//                        .setTitleText("等待")
-//                        .setContentText("你好世界")
-//                        .show();
+                mIntent.setClass(this, HandlerTestActivity.class);
+                startActivity(mIntent);
                 break;
             case R.id.bt03://5.0效果测试
                 mIntent.setClass(this, TestLolipopDemoActivity.class);
@@ -415,6 +335,11 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.bt28:
                 mIntent.setClass(this, RxJavaLearnActivity.class);
+                startActivity(mIntent);
+                break;
+
+            case R.id.bt29:
+                mIntent.setClass(this, MakeSoundsActivity.class);
                 startActivity(mIntent);
                 break;
 

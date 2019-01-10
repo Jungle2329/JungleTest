@@ -14,14 +14,14 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            app:contentScrim="@color/red_btn_bg_color"
+            app:contentScrim="@color/colorMain"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
                 android:id="@+id/sdv_bg"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@color/blue_btn_bg_color" />
+                android:src="@color/colorMain" />
 
             <android.support.v7.widget.Toolbar
                 android:layout_width="match_parent"

@@ -5,7 +5,7 @@
     android:id="@+id/feed_detail_content"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/blue_btn_bg_pressed_color"
+    android:background="@color/colorMain"
     android:paddingBottom="18dp"
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
@@ -15,7 +15,7 @@
         android:id="@+id/imageView_head"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:src="@drawable/success_bow"
+        android:src="@drawable/ic_launcher"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

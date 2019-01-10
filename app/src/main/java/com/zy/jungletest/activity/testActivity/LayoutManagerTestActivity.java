@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.zy.jungletest.R;
 import com.zy.jungletest.base.BaseActivity;
-import com.zy.jungletest.utils.AppUtils;
+import com.zy.commonlibrary.utils.AppUtils;
 
 import butterknife.BindView;
 

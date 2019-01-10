@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.zy.jungletest">
 
     <uses-permission android:name="android.permission.CAMERA" />
@@ -7,21 +8,22 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-    <application
-        android:name="com.zy.jungletest.MyApplication"
-        android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
-        android:theme="@style/AppTheme">
 
-        <activity android:name=".activity.MainActivity">
+    <application
+        android:name="com.zy.commonlibrary.base.MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme"
+        tools:replace="android:icon">
+        <activity android:name=".ui.start.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.testActivity.TestGridViewActivity" />
         <activity android:name=".activity.testActivity.TestLolipopDemoActivity" />
         <activity android:name=".activity.testActivity.TextureViewDemo" />
@@ -48,6 +50,8 @@
         <activity android:name=".activity.testActivity.NewTestActivity" />
         <activity android:name=".activity.testActivity.MultipleViewPagerManagerActivity" />
         <activity android:name=".activity.testActivity.RxJavaLearnActivity" />
+        <activity android:name=".activity.testActivity.MakeSoundsActivity" />
+        <activity android:name=".activity.testActivity.HandlerTestActivity" />
     </application>
 
 </manifest>

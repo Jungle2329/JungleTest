@@ -8,7 +8,7 @@ package com.zy.jungletest.Java8;
 
 public class Car {
 
-    //Supplier是jdk1.8的接口，这里和lamda一起使用了
+    //Supplier是jdk1.8的接口，这里和lambda一起使用了
     public static Car create(final Supplier<Car> supplier) {
         return supplier.get();
     }
