@@ -26,7 +26,6 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         appContext = this;
-
         initARouter();
         Fresco.initialize(this);
     }
