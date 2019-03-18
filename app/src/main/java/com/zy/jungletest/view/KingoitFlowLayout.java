@@ -3,7 +3,7 @@ package com.zy.jungletest.view;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.LinearLayout;
+import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ import java.util.List;
  * @Description
  */
 
-public class KingoitFlowLayout extends LinearLayout {
+public class KingoitFlowLayout extends ViewGroup {
 
     //记录每个View的位置
     private List<ChildPos> mChildPos = new ArrayList<>();
@@ -134,10 +134,10 @@ public class KingoitFlowLayout extends LinearLayout {
     /**
      * 让ViewGroup能够支持margin属性
      */
-//    @Override
-//    public LayoutParams generateLayoutParams(AttributeSet attrs) {
-//        return new MarginLayoutParams(getContext(), attrs);
-//    }
+    @Override
+    public LayoutParams generateLayoutParams(AttributeSet attrs) {
+        return new MarginLayoutParams(getContext(), attrs);
+    }
 
     /**
      * 设置每个View的位置

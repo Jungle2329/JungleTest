@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.IntDef;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -76,6 +77,8 @@ public class MainActivity extends BaseActivity {
 
     @BindView(R.id.atv)
     AtTextView atv;
+    @BindView(R.id.rv_main)
+    RecyclerView rv_main;
 
     /**
      * 保存数据测试

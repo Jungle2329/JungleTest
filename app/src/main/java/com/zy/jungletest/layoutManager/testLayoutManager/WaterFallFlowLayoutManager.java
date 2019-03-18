@@ -44,7 +44,7 @@ public class WaterFallFlowLayoutManager extends GridLayoutManager {
         super.onLayoutChildren(recycler, state);
 
         detachAndScrapAttachedViews(recycler);
-//        calculateItemSize(recycler);
+        calculateItemSize(recycler);
     }
 
     private void calculateItemSize(RecyclerView.Recycler recycler) {

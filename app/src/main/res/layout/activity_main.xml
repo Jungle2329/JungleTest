@@ -7,14 +7,21 @@
     android:gravity="center"
     tools:context="com.zy.jungletest.activity.MainActivity">
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="visible">
 
-        <com.zy.jungletest.view.KingoitFlowLayout
+        <com.zy.jungletest.view.FlowLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:visibility="gone">
 
             <Button
                 android:id="@+id/bt01"
@@ -210,6 +217,9 @@
                 android:layout_height="wrap_content"
                 android:text="tts相关"
                 android:textAllCaps="false" />
-        </com.zy.jungletest.view.KingoitFlowLayout>
+
+        </com.zy.jungletest.view.FlowLayout>
     </ScrollView>
+
+
 </FrameLayout>
