@@ -8,7 +8,6 @@ import java.lang.annotation.Target;
 /**
  * Created by Jungle on 2018/5/22 0022.
  *
- * @desc TODO
  */
 
 @Target(ElementType.METHOD)

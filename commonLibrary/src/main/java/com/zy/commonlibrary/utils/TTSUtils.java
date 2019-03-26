@@ -7,44 +7,41 @@ import android.os.Build;
 import android.os.Environment;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.UtteranceProgressListener;
+import android.support.annotation.RequiresApi;
 
 import com.zy.commonlibrary.R;
-import com.zy.commonlibrary.base.LogUtils;
 import com.zy.commonlibrary.base.MyApplication;
 
 import java.io.File;
-import java.util.HashMap;
 import java.util.Locale;
 
 /**
  * Created by Jungle on 2018/11/12 0012.
  * 一些手机支持原生播报
  * <p>
- * 播放语音，多次执行会按队列播放，单例模式
+ * 播放语音，多次执行会按队列播放
  */
 
 public class TTSUtils {
 
     private TextToSpeech mTextToSpeech;
     private boolean soundPoolEnable = true;
+    private Context mContext;
+    private String text;
 
-    private TTSUtils() {
-
+    private TTSUtils(Context mContext, String text) {
+        this.mContext = mContext;
+        this.text = text;
     }
 
-    private static class InstanceInner {
-        private static TTSUtils instance = new TTSUtils();
-    }
-
-    public static TTSUtils getInstance() {
-        return InstanceInner.instance;
-    }
-
-    public void play(final String text) {
-        mTextToSpeech = new TextToSpeech(MyApplication.getAppContext(), new TextToSpeech.OnInitListener() {
+    /**
+     * 仅播放
+     */
+    public void play() {
+        mTextToSpeech = new TextToSpeech(mContext, new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
-                if (status == TextToSpeech.SUCCESS) {
+                if (status == TextToSpeech.SUCCESS && Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
                     playData(text);
                 } else {
                     playWithSoundPool(text);
@@ -54,28 +51,13 @@ public class TTSUtils {
         });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1)
     private void playData(String text) {
         int ttsState = mTextToSpeech.setLanguage(Locale.CHINESE);
         if (ttsState == TextToSpeech.SUCCESS) {
-            mTextToSpeech.setOnUtteranceProgressListener(new UtteranceProgressListener() {
-                @Override
-                public void onStart(String utteranceId) {
-                }
-
-                @Override
-                public void onDone(String utteranceId) {
-                    //资源释放
-                    mTextToSpeech.shutdown();
-                }
-
-                @Override
-                public void onError(String utteranceId) {
-                    //资源释放
-                    mTextToSpeech.shutdown();
-                }
-            });
+            mTextToSpeech.setOnUtteranceProgressListener(new MyUtteranceProgressListener());
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                mTextToSpeech.speak(text, TextToSpeech.QUEUE_ADD, null, "AppPay");
+                mTextToSpeech.speak(text, TextToSpeech.QUEUE_ADD, null, "play");
             } else {
                 mTextToSpeech.speak(text, TextToSpeech.QUEUE_ADD, null);
             }
@@ -218,17 +200,63 @@ public class TTSUtils {
 
     /**
      * 根据文字生成音频文件
-     *
-     * @param text
      */
-    public void saveFile(String text) {
-        int ttsState = mTextToSpeech.setLanguage(Locale.CHINESE);
-        LogUtils.i("zhangyi", "ttsState:" + ttsState);
-        File file = new File(Environment.getExternalStorageDirectory() + "/smallpig/tempSounds");
-        if (!file.exists()) {
-            file.mkdirs();
+    @RequiresApi(21)
+    public void saveFile() {
+        mTextToSpeech = new TextToSpeech(mContext, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int i) {
+                final File file = new File(Environment.getExternalStorageDirectory() + "/tempSounds");
+                if (!file.exists()) {
+                    file.mkdirs();
+                }
+                File filePath = new File(file, text + ".wav");
+                mTextToSpeech.synthesizeToFile(text, null, filePath, "save");
+                mTextToSpeech.setOnUtteranceProgressListener(new MyUtteranceProgressListener());
+            }
+        });
+
+    }
+
+    public static class Builder {
+
+        private Context mContext;
+        private String text = "";
+
+        public Builder with(Context mContext) {
+            this.mContext = mContext;
+            return this;
         }
-        File filePath = new File(file, text + ".wav");
-        mTextToSpeech.synthesizeToFile(text, new HashMap<String, String>(), filePath.toString());
+
+        public Builder setText(String text) {
+            this.text = text;
+            return this;
+        }
+
+        public TTSUtils build() {
+            return new TTSUtils(mContext, text);
+        }
+    }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1)
+    class MyUtteranceProgressListener extends UtteranceProgressListener {
+
+        @Override
+        public void onStart(String s) {
+
+        }
+
+        @Override
+        public void onDone(String s) {
+            //资源释放
+            mTextToSpeech.shutdown();
+        }
+
+        @Override
+        public void onError(String s) {
+            //资源释放
+            mTextToSpeech.shutdown();
+        }
     }
 }

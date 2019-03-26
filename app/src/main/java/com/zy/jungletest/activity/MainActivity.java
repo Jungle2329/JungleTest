@@ -295,6 +295,7 @@ public class MainActivity extends BaseActivity {
                 ProxyTest test = new ProxyTest();
                 test.getProxy(this).eat();
                 test.getProxy(this).drink();
+                test.getProxy(this).happy();
                 break;
 
             case R.id.bt23://利用反射取注解上的信息

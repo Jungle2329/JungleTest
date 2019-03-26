@@ -1,5 +1,6 @@
 package com.zy.jungletest.activity.testActivity
 
+import android.os.Build
 import com.zy.commonlibrary.utils.TTSUtils
 import com.zy.jungletest.R
 import com.zy.jungletest.base.BaseActivity
@@ -7,7 +8,7 @@ import kotlinx.android.synthetic.main.activity_makesounds.*
 
 /**
  * Created by Jungle on 2018/11/12 0012.
- * @desc
+ * @desc tts
  */
 class MakeSoundsActivity : BaseActivity() {
 
@@ -23,8 +24,21 @@ class MakeSoundsActivity : BaseActivity() {
     }
 
     override fun initListener() {
+        btn_play.setOnClickListener {
+            TTSUtils.Builder()
+                    .with(this)
+                    .setText(et_input.text.toString().trim())
+                    .build()
+                    .play()
+        }
         btn_confirm.setOnClickListener {
-            TTSUtils.getInstance().saveFile(et_input.text.toString().trim())
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                TTSUtils.Builder()
+                        .with(this)
+                        .setText(et_input.text.toString().trim())
+                        .build()
+                        .saveFile()
+            }
         }
     }
 }

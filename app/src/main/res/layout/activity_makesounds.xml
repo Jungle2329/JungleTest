@@ -7,15 +7,21 @@
     <EditText
         android:id="@+id/et_input"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:hint="input text" />
 
+    <Button
+        android:id="@+id/btn_play"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="播放语音"
+        app:layout_constraintTop_toBottomOf="@+id/et_input" />
 
     <Button
         android:id="@+id/btn_confirm"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:text="生成语音文件"
-        app:layout_constraintTop_toBottomOf="@+id/et_input" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_play" />
 
 </android.support.constraint.ConstraintLayout>

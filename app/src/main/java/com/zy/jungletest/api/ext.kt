@@ -5,7 +5,7 @@ import android.widget.Toast
 
 /**
  * Created by Jungle on 2018/10/17 0017.
- * @desc TODO
+ * @desc
  */
 fun Context.toast(message: String, lenght: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this, message, lenght).show()

@@ -10,7 +10,7 @@ import java.lang.reflect.Proxy;
 /**
  * Created by Jungle on 2018/5/16 0016.
  *
- * @desc TODO
+ * @desc 代理类学习
  */
 
 public class ProxyTest {

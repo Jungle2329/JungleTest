@@ -6,7 +6,6 @@ import com.zy.jungletest.base.BaseActivity;
 /**
  * Created by Jungle on 2018/5/22 0022.
  *
- * @desc TODO
  */
 
 public class AnnotationActivity extends BaseActivity {

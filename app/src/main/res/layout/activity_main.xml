@@ -21,7 +21,7 @@
         <com.zy.jungletest.view.FlowLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <Button
                 android:id="@+id/bt01"
