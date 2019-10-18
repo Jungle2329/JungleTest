@@ -4,4 +4,5 @@
     <color name="colorMain">#45a989</color>
     <!--不可点击-->
     <color name="colorUnClickable">#9fd1c1</color>
+    <color name="half_transparent">#80000000</color>
 </resources>

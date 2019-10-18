@@ -45,7 +45,7 @@ public class EasyLogProcessor extends AbstractProcessor {
             for (Element e : env.getElementsAnnotatedWith(te)) {
                 EasyLog mEasyLog = e.getAnnotation(EasyLog.class);
                 messager.printMessage(Diagnostic.Kind.WARNING, "HelloWorld" + mEasyLog.tag() + mEasyLog.value());
-//                analysisAnnotated(e);
+                analysisAnnotated(e);
             }
         }
         System.out.println("------------------------------");

@@ -5,7 +5,7 @@
     android:background="@color/colorGreen"
     android:orientation="vertical">
 
-    <com.zy.jungletest.view.RadarView
+    <com.zy.commonlibrary.customview.RadarView
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

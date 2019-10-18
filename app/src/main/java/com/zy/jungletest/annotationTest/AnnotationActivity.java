@@ -1,6 +1,5 @@
 package com.zy.jungletest.annotationTest;
 
-import com.zy.commonlibrary.base.Constant;
 import com.zy.jungletest.base.BaseActivity;
 
 /**
@@ -17,7 +16,7 @@ public class AnnotationActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        testAnnotation1(Constant.APRIL);
+        testAnnotation1(Month.APRIL);
 
     }
 

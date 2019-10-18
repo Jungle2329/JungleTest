@@ -16,42 +16,42 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-        <activity android:name=".ui.start.SplashActivity">
+        <activity android:name=".ui.start.SplashActivity"></activity>
+        <activity android:name="com.zy.jungletest.ui.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MainActivity" />
-        <activity android:name=".activity.testActivity.TestGridViewActivity" />
-        <activity android:name=".activity.testActivity.TestLolipopDemoActivity" />
-        <activity android:name=".activity.testActivity.TextureViewDemo" />
-        <activity android:name=".activity.testActivity.CustomViewActivity" />
-        <activity android:name=".activity.testActivity.DatabaseTestActivity" />
-        <activity android:name=".activity.testActivity.GestureDetectorTestActivity" />
-        <activity android:name=".activity.testActivity.SlidingMenuTestActivity" />
-        <activity android:name=".activity.testActivity.ExifInterfaceActivity" />
-        <activity android:name=".activity.testActivity.RadarActivity" />
-        <activity android:name=".activity.testActivity.AsyncTaskActivity" />
+        <activity android:name="com.zy.jungletest.ui.activity.testActivity.TestGridViewActivity" />
+        <activity android:name="com.zy.jungletest.ui.activity.testActivity.TestLolipopDemoActivity" />
+        <activity android:name="com.zy.jungletest.ui.activity.testActivity.TextureViewDemo" />
+        <activity android:name="com.zy.jungletest.ui.activity.testActivity.CustomViewActivity" />
+        <activity android:name="com.zy.jungletest.ui.activity.testActivity.DatabaseTestActivity" />
+        <activity android:name="com.zy.jungletest.ui.activity.testActivity.GestureDetectorTestActivity" />
+        <activity android:name="com.zy.jungletest.ui.activity.testActivity.SlidingMenuTestActivity" />
+        <activity android:name="com.zy.jungletest.ui.activity.testActivity.ExifInterfaceActivity" />
+        <activity android:name="com.zy.jungletest.ui.activity.testActivity.RadarActivity" />
+        <activity android:name="com.zy.jungletest.ui.activity.testActivity.AsyncTaskActivity" />
         <activity android:name=".mvpTest.activity.MVPTestActivity" />
-        <activity android:name=".activity.testActivity.TouchEventTestActivity" />
-        <activity android:name=".activity.testActivity.NestedScrollViewTestActivity" />
+        <activity android:name="com.zy.jungletest.ui.activity.testActivity.TouchEventTestActivity" />
+        <activity android:name="com.zy.jungletest.ui.activity.testActivity.NestedScrollViewTestActivity" />
         <activity android:name=".annotationTest.AnnotationActivity" />
-        <activity android:name=".activity.testActivity.LayoutManagerTestActivity" />
+        <activity android:name="com.zy.jungletest.ui.activity.testActivity.LayoutManagerTestActivity" />
         <activity
-            android:name=".activity.launchMode.LaunchModeTestActivity"
+            android:name="com.zy.jungletest.ui.activity.launchMode.LaunchModeTestActivity"
             android:launchMode="singleTask" />
-        <activity android:name=".activity.launchMode.LaunchModeAActivity" />
-        <activity android:name=".activity.launchMode.LaunchModeBActivity" />
-        <activity android:name=".activity.testActivity.RetrofitRxActivity" />
-        <activity android:name=".activity.testActivity.SuperBigImageActivity" />
-        <activity android:name=".activity.testActivity.KotlinTestActivity" />
-        <activity android:name=".activity.testActivity.NewTestActivity" />
-        <activity android:name=".activity.testActivity.MultipleViewPagerManagerActivity" />
-        <activity android:name=".activity.testActivity.RxJavaLearnActivity" />
-        <activity android:name=".activity.testActivity.MakeSoundsActivity" />
-        <activity android:name=".activity.testActivity.HandlerTestActivity" />
+        <activity android:name="com.zy.jungletest.ui.activity.launchMode.LaunchModeAActivity" />
+        <activity android:name="com.zy.jungletest.ui.activity.launchMode.LaunchModeBActivity" />
+        <activity android:name="com.zy.jungletest.ui.activity.testActivity.RetrofitRxActivity" />
+        <activity android:name="com.zy.jungletest.ui.activity.testActivity.SuperBigImageActivity" />
+        <activity android:name="com.zy.jungletest.ui.activity.testActivity.KotlinTestActivity" />
+        <activity android:name="com.zy.jungletest.ui.activity.testActivity.NewTestActivity" />
+        <activity android:name="com.zy.jungletest.ui.activity.testActivity.MultipleViewPagerManagerActivity" />
+        <activity android:name="com.zy.jungletest.ui.activity.testActivity.RxJavaLearnActivity" />
+        <activity android:name="com.zy.jungletest.ui.activity.testActivity.MakeSoundsActivity" />
+        <activity android:name="com.zy.jungletest.ui.activity.testActivity.HandlerTestActivity" />
     </application>
 
 </manifest>

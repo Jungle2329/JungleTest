@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
 
-    <com.zy.jungletest.view.GooView
+    <com.zy.commonlibrary.customview.GooView
         android:id="@+id/mView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

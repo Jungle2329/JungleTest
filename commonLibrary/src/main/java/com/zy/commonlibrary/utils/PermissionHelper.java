@@ -15,22 +15,20 @@ import android.support.v7.app.AlertDialog;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.ArrayList;
 
 /**
  * Created by Jungle on 2019/1/8 0008.
- *
- * @desc 验证是否有权限的帮助类
+ * 1.0.1添加了安装未知来源权限
+ * @version 1.0.1
+ * @author JungleZhang
+ * @Description 验证是否有权限的帮助类
  */
 public class PermissionHelper {
 
-    private ForcePermissionCallbacks mForceCallBack;
-    private NormalPermissionCallbacks mNormalCallBack;
-
-    private Activity mActivity;
-    private String[] permission;
-
     public static final int REQUEST_CODE = 10000;
     public static final int SETTINGS_CODE = 10001;
+    public static final int INSTALL_PERMISS_CODE = 10002;
 
     //需要申请的权限，同组权限原则上只需要申请一个，多个同组权限申请对应一个组权限，一个权限通过全组权限通过，
     //如果有特殊需要，可以修改提示dialog和提示msg对应不同权限
@@ -49,7 +47,7 @@ public class PermissionHelper {
     //麦克风组
     public static final String RECORD_AUDIO = "android.permission.RECORD_AUDIO";//(录音权限)
     //电话组
-    public static final String READ_PHONE_STATE = "android.permission.READ_PHONE_STATE";//(读取电话状态)
+    public static final String READ_PHONE_STATE = "android.permission.READ_PHONE_STATE";//(读取手机状态)
     public static final String CALL_PHONE = "android.permission.CALL_PHONE";//(拨打电话)
     public static final String READ_CALL_LOG = "android.permission.READ_CALL_LOG";//(读取通话记录)
     public static final String WRITE_CALL_LOG = "android.permission.WRITE_CALL_LOG";//(修改通话记录)
@@ -78,6 +76,12 @@ public class PermissionHelper {
 
     }
 
+    private ForcePermissionCallbacks mForceCallBack;
+    private NormalPermissionCallbacks mNormalCallBack;
+    private InstallAppCallBacks installCallBacks;
+    private Activity mActivity;
+    private String[] permission;
+
     /**
      * 验证权限的帮助类，
      * 使用帮助
@@ -91,6 +95,15 @@ public class PermissionHelper {
     public PermissionHelper(Activity mActivity, @PermissionGroup String... permission) {
         this.mActivity = mActivity;
         this.permission = permission;
+    }
+
+    /**
+     * 1. 8.0以上版本申请安装未知来源apk，需要添加权限 <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+     * 2. onActivityResult 方法调用 {@link #bindActivityResult(int, int, Intent)}
+     * 3. {@link #checkInstallPackage(InstallAppCallBacks)} 使用该方法发起验证，使用回调判断
+     */
+    public PermissionHelper(Activity mActivity) {
+        this.mActivity = mActivity;
     }
 
     /**
@@ -123,12 +136,25 @@ public class PermissionHelper {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             int state = checkP(permission);
             if (state == PackageManager.PERMISSION_GRANTED) {//都已经有权限了
-                mNormalCallBack.onPermissionsResult();
+                mNormalCallBack.onPermissionsSuccess();
             } else {
                 mActivity.requestPermissions(permission, REQUEST_CODE);
             }
         } else {
-            mNormalCallBack.onPermissionsResult();
+            mNormalCallBack.onPermissionsSuccess();
+        }
+    }
+
+
+    public void checkInstallPackage(InstallAppCallBacks callBacks) {
+        installCallBacks = callBacks;
+        //只有8.0以上的手机需要验证，如果不是直接返回成功
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && !mActivity.getPackageManager().canRequestPackageInstalls()) {
+            Uri packageURI = Uri.parse("package:" + mActivity.getPackageName());
+            Intent intent = new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, packageURI);
+            mActivity.startActivityForResult(intent, INSTALL_PERMISS_CODE);
+        } else {
+            callBacks.onSuccess();
         }
     }
 
@@ -156,19 +182,38 @@ public class PermissionHelper {
      * @param permissions
      * @param grantResults
      */
-    public void bindRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == REQUEST_CODE) {
+    public void bindRequestPermissionsResult(int requestCode, @NonNull final String[] permissions, @NonNull final int[] grantResults) {
+        if (requestCode == REQUEST_CODE) {// 一般申请权限
             if (mNormalCallBack != null) {
-                mNormalCallBack.onPermissionsResult();
+                boolean isSuccess = true;
+                for (int result : grantResults) {
+                    if (result == PackageManager.PERMISSION_DENIED) {
+                        isSuccess = false;
+                    }
+                }
+                if (isSuccess) {
+                    mNormalCallBack.onPermissionsSuccess();
+                } else {
+                    mNormalCallBack.onPermissionsFailed();
+                }
 
-            } else if (mForceCallBack != null) {
+            } else if (mForceCallBack != null) {// 强制申请权限
+                // 同意了的权限
+                final ArrayList<String> grantedPermissions = new ArrayList<>();
+                // 拒绝了的权限
+                final ArrayList<String> deniedPermissions = new ArrayList<>();
+
                 StringBuilder sbMsg = new StringBuilder();
                 for (int i = 0; i < grantResults.length; i++) {
                     //把所有拒绝了的权限整理出来，写入sbMsg
                     if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
+                        deniedPermissions.add(permissions[i]);
                         sbMsg.append(tableOfComparisons4Permission(permissions[i]));
                         sbMsg.append("，");
+                    } else {
+                        grantedPermissions.add(permissions[i]);
                     }
+
                 }
                 if (sbMsg.toString().isEmpty()) {
                     //用户同意了申请的全部权限
@@ -179,7 +224,7 @@ public class PermissionHelper {
                     //用户拒绝了申请的权限之一
                     AlertDialog dialog = new AlertDialog.Builder(mActivity)
                             .setTitle("当前应用缺少必要权限")
-                            .setMessage("请点击[确定] - [权限] - 打开所需[" + msg + "]权限。最后点击两次后退按钮，即可返回。")
+                            .setMessage("缺少必要权限会导致应用程序功能缺失，请点击[确定] - [权限] - 打开所需[" + msg + "]权限。最后点击两次后退按钮，即可返回。")
                             .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
@@ -194,7 +239,8 @@ public class PermissionHelper {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     dialog.dismiss();
-                                    mForceCallBack.onPermissionsDenied();
+                                    mForceCallBack.onPermissionsDeniedPart(deniedPermissions);
+                                    mForceCallBack.onPermissionsGrantedPart(grantedPermissions);
                                 }
                             })
                             .create();
@@ -205,24 +251,56 @@ public class PermissionHelper {
         }
     }
 
+    /**
+     * 绑定 onActivityResult()使用
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     public void bindActivityResult(int requestCode, int resultCode, Intent data) {
-        if (SETTINGS_CODE == requestCode) {
-            //返回后再次检查申请的权限是否被用户打开了
-            checkPermissionForce(mForceCallBack);
+        switch (requestCode) {
+            case INSTALL_PERMISS_CODE:// 安装位置应用权限
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && installCallBacks != null) {
+                    if (mActivity.getPackageManager().canRequestPackageInstalls()) {
+                        installCallBacks.onSuccess();
+                    } else {
+                        installCallBacks.onFailed();
+                    }
+                }
+                break;
+            case SETTINGS_CODE: //返回后再次检查申请的权限是否被用户打开了
+                checkPermissionForce(mForceCallBack);
+                break;
+            default:
+                break;
         }
     }
 
 
     public interface ForcePermissionCallbacks {
 
+        //权限全部通过才回调
         void onPermissionsAllGranted();
 
-        void onPermissionsDenied();
+        //权限部分通过
+        void onPermissionsGrantedPart(ArrayList<String> grantedPermission);
+
+        //权限部分拒绝
+        void onPermissionsDeniedPart(ArrayList<String> deniedPermission);
     }
 
     public interface NormalPermissionCallbacks {
+        //权限部分通过
+        void onPermissionsSuccess();
 
-        void onPermissionsResult();
+        //被拒绝的权限
+        void onPermissionsFailed();
+    }
+
+    public interface InstallAppCallBacks {
+        void onSuccess();
+
+        void onFailed();
     }
 
     private String tableOfComparisons4Permission(String permission) {

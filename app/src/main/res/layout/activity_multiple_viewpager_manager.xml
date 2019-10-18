@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.zy.jungletest.activity.testActivity.MultipleViewPagerManagerActivity">
+    tools:context=".ui.activity.testActivity.MultipleViewPagerManagerActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"

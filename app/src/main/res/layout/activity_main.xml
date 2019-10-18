@@ -5,20 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    tools:context="com.zy.jungletest.activity.MainActivity">
+    tools:context=".ui.activity.MainActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone" />
+        android:visibility="visible" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible">
+        android:visibility="gone">
 
-        <com.zy.jungletest.view.FlowLayout
+        <com.zy.commonlibrary.customview.FlowLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="visible">
@@ -190,12 +190,13 @@
                 android:text="kotlin学习"
                 android:textAllCaps="false" />
 
-            <com.zy.jungletest.view.AtTextView
+            <com.zy.commonlibrary.utils.AtTextView
                 android:id="@+id/atv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="荔枝纹，算是@金刚纹路;@金刚纹路;@金刚纹路;@金路;里面比较差的了。后期@盘完;肉会的效果。练@手不错;，建议入手串比较好的。这样对得起自己的精力。我也是个新手玩家，大家可以多交流@金刚纹路;"
-                android:textIsSelectable="true" />
+                android:textIsSelectable="true"
+                app:keywordsColor="#00ff00" />
 
             <Button
                 android:id="@+id/bt27"
@@ -218,7 +219,14 @@
                 android:text="tts相关"
                 android:textAllCaps="false" />
 
-        </com.zy.jungletest.view.FlowLayout>
+            <Button
+                android:id="@+id/bt30"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Json文件解析"
+                android:textAllCaps="false" />
+
+        </com.zy.commonlibrary.customview.FlowLayout>
     </ScrollView>
 
 

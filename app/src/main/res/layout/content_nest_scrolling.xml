@@ -8,7 +8,7 @@
     android:background="@color/colorAccent"
     android:fillViewport="true"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.zy.jungletest.activity.testActivity.MultipleViewPagerManagerActivity"
+    tools:context=".ui.activity.testActivity.MultipleViewPagerManagerActivity"
     tools:showIn="@layout/activity_multiple_viewpager_manager">
 
     <android.support.v4.view.ViewPager

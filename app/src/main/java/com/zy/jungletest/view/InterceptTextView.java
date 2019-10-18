@@ -1,7 +1,6 @@
 package com.zy.jungletest.view;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
@@ -16,11 +15,11 @@ public class InterceptTextView extends android.support.v7.widget.AppCompatTextVi
         super(context);
     }
 
-    public InterceptTextView(Context context, @Nullable AttributeSet attrs) {
+    public InterceptTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public InterceptTextView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public InterceptTextView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
