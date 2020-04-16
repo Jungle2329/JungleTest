@@ -1,5 +1,6 @@
 package com.zy.jungletest.api;
 
+import com.zy.jungletest.decrypt.BaseModelReq;
 import com.zy.jungletest.model.RetrofitRxTestBean;
 import com.zy.jungletest.model.TranslationBean;
 
@@ -10,6 +11,7 @@ import io.reactivex.Observable;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.adapter.rxjava2.Result;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
@@ -41,4 +43,9 @@ public interface ApiRetrofit {
     @Streaming
     @GET
     Call<ResponseBody> downloadImage(@Url String fileUrl);
+
+    // zjtx接口
+    @POST("class/app/classLibrary/classlookInfo")
+    Observable<ResponseBody> recordCourseTime(@Body BaseModelReq baseModelReq);
+
 }

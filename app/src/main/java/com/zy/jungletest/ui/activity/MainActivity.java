@@ -3,6 +3,7 @@ package com.zy.jungletest.ui.activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.widget.RecyclerView;
@@ -21,6 +22,7 @@ import com.zy.jungletest.annotationTest.Season;
 import com.zy.jungletest.api.ApiRetrofit;
 import com.zy.jungletest.base.BaseActivity;
 import com.zy.jungletest.database.DatabaseHelper;
+import com.zy.jungletest.decrypt.ModifyZJTX;
 import com.zy.jungletest.layoutManager.FlowLayoutManager;
 import com.zy.jungletest.model.RetrofitRxTestBean;
 import com.zy.jungletest.model.TranslationBean;
@@ -35,7 +37,6 @@ import com.zy.jungletest.ui.activity.testActivity.HandlerTestActivity;
 import com.zy.jungletest.ui.activity.testActivity.JsonFileLoader;
 import com.zy.jungletest.ui.activity.testActivity.KotlinTestActivity;
 import com.zy.jungletest.ui.activity.testActivity.LayoutManagerTestActivity;
-import com.zy.jungletest.ui.activity.testActivity.MakeSoundsActivity;
 import com.zy.jungletest.ui.activity.testActivity.MultipleViewPagerManagerActivity;
 import com.zy.jungletest.ui.activity.testActivity.NestedScrollViewTestActivity;
 import com.zy.jungletest.ui.activity.testActivity.RadarActivity;
@@ -355,8 +356,11 @@ public class MainActivity extends BaseActivity {
                 break;
 
             case R.id.bt29:
-                mIntent.setClass(this, MakeSoundsActivity.class);
-                startActivity(mIntent);
+//                mIntent.setClass(this, MakeSoundsActivity.class);
+//                startActivity(mIntent);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    ModifyZJTX.excuteAll();
+                }
                 break;
 
             case R.id.bt30:

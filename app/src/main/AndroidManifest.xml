@@ -16,7 +16,6 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-        <activity android:name=".ui.start.SplashActivity"></activity>
         <activity android:name="com.zy.jungletest.ui.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

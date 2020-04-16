@@ -11,12 +11,12 @@
         android:id="@+id/rv_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible" />
+        android:visibility="gone" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <com.zy.commonlibrary.customview.FlowLayout
             android:layout_width="match_parent"
@@ -225,6 +225,10 @@
                 android:layout_height="wrap_content"
                 android:text="Json文件解析"
                 android:textAllCaps="false" />
+
+            <com.airbnb.lottie.LottieAnimationView >
+
+            </com.airbnb.lottie.LottieAnimationView>
 
         </com.zy.commonlibrary.customview.FlowLayout>
     </ScrollView>
